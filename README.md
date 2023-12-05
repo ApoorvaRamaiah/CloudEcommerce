@@ -23,9 +23,25 @@ Install dependencies
 ```bash
   npm install
 ```
+or use
 
+```bash
+    npm i
+```
+or 
+```bash
+    npm install --global yarn
+```
+To check yarn version use
+```bash
+    yarn --version
+```
 ## Available Scripts
 In the project directory, you can run:
-`npm start`
+`npm run`
+or
+`yarn start`
+I personally use yarn start you are free to use npm start.
+
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
