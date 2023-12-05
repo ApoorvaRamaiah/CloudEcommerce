@@ -32,6 +32,10 @@ or
 ```bash
     npm install --global yarn
 ```
+or 
+```bash
+  yarn install
+```
 To check yarn version use
 ```bash
     yarn --version
