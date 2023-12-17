@@ -18,7 +18,7 @@ const Cart = () => {
             <Link to="/" className="btn  btn-outline-dark mx-4">
               <i className="fa fa-arrow-left"></i> Continue Shopping
             </Link> 
-          </div>
+          </div> 
         </div>
       </div>
     );
