@@ -17,7 +17,7 @@ const Cart = () => {
             <h4 className="p-3 display-5">Your Cart is Empty</h4>
             <Link to="/" className="btn  btn-outline-dark mx-4">
               <i className="fa fa-arrow-left"></i> Continue Shopping
-            </Link>
+            </Link> 
           </div>
         </div>
       </div>
