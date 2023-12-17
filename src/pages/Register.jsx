@@ -172,7 +172,7 @@ const Register = () => {
             console.error('Registration error:', errorCode, errorMessage);
         }
     };
-
+ 
     return (
         <>
             <Navbar />
