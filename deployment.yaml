@@ -1,0 +1,43 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "ecommerce"
+  namespace: "default"
+  labels:
+    app: "ecommerce"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "ecommerce"
+  template:
+    metadata:
+      labels:
+        app: "ecommerce"
+    spec:
+      containers:
+      - name: "reactimage-sha256-1"
+        image: "us-central1-docker.pkg.dev/cloudecommerce-1/cloudecommerce/reactimage@sha256:7aa709cd55f5146fd6a298069ad936e0446e1b2843c9e8c69436ce94c0451557"
+---
+apiVersion: "autoscaling/v2"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "ecommerce-hpa-s9pg"
+  namespace: "default"
+  labels:
+    app: "ecommerce"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "ecommerce"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      target:
+        type: "Utilization"
+        averageUtilization: 80

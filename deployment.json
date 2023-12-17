@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "cloudecommerce-1",
+  "private_key_id": "cfc1f8eebd542b71ec607cfc1b6cb6b004560848",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDFFOdgDmxKZSct\nStOVYi9weVGlIR4teEtCwsWM0bELbv34LaJynHbIfxYwZKVeHZLMahcz34sd8syp\nZ3yAb2GPxI9z3peBUmGgIcjuUh2/p5Ja5LtOvUQm1owZbnVhSwre4Lb0kJRJiiZZ\n1a/u6hzmm0LmAhJ0hC3RmaI/mZoF188d3Aq2pegDJ9Mg/ZxTMF3s3vk2fdkO2FDc\nkYUXrvoNGyRDzvTeBCU2Q2BIUv10R6kXfzKXVZkEmRmDgKJ+deXplX+1rJJ8KMgk\nmm37s3BXnlH0xuYl3ymGM4fRELzcGF2l9jOT3v1KjwwPiKnLgKoW5I6Y5fnyqHxF\nJvrBosFdAgMBAAECggEAJQDcxINQv9MoPO/MtEKgJ50PwFJsiRsJ/nn1f5ArjrsD\nQmLHGn/YKaL69pEfH4Gr+2d7/cheJXxeAvykOrUu+0BrstS7W5OtMtTFFkIixcZf\ny2Mg7BLLRgOIgInlziO54ckNcPPoc7pVow5lHxWj4YSLVgZTkr7yn2UaOpjLe4cK\nF5lKnhLmBTKwukgG/3TlWSW7py8+sgAFR4qhQ39BHmbtUcxijJsAQwMflpCDGuK8\nApoDiX+E7l/wLUM3l0NR4xRx33i+EFwvwMXy8Cer/0McMXGv71s6HUxdr9Fkr9iP\nV7ut6cpNub4Uzd0zIVcizj5KcgJK3j0MofjFzUtiHQKBgQDwiMIZadlr+YrxCOA1\nARtCcdDnUqrfWzdrB7ZLvHEpoyad6edLf+n/CEfaqduv6whbFaRjtyKevAhhNe4K\n+Obyo5EBYAgIGFWIRkKV0/d6sMWv00PkaXEHwLKW+HgbZ6rvWujc4p2AKwADcOOE\nNHN7nW1Pt26c/Fj2N8BAJFEH2wKBgQDRwOhhswrax4soxJGiAA1klkP/2qbEqnBV\niktypkXPoWX6UkvuqvFVV9/22Ae20dZzsra1lmzOLhV2WTG1SHUQ+V3e7osbNVJi\nPQ05dLgbicewXtiWvMJ8DWTq2b0h1a8AuvWWUuHBnGPaVKn+kf2N5aXAEhzdqzqO\nKmpKj1BdJwKBgEAoqmVu94C2kloSvQNGZUgG5eseANgNE64n43c2L5UkoKNUhc58\nsyTEx63Kyv+UmKj7D9tNOR3QGAgeA33HwIqOGJqeS+Yk34O3AgHHBWcjiceJeb2O\nZojj3H8qjZb5wv2PaTep9sr+LUW9seJMv1UEu+icjBOxt+UNH+m8BiUrAoGBALMF\noZDZXjdSPiyCcQXCY6vpMIprlRCfo5bunOxyi3zl9QLMQLCoR6gegzHMOfFIcW94\nJccgZycmX/0NrYZbHEdrfjnqgOGtBe6Aywux2fzvAHdAzD0DSD7Ws75aLrl1BpNp\n/nfZr4Mutm6++gQjmDQGwAwJqYdsQGLcQrH2VZHbAoGAYzgEfQV4vQvC5hcsSXeB\nZoCP79TLVQLm1sYmRPrxrhywalreS0o8fBkbrdZ+BY56ktzVsB85qPEPtM99o1Ek\nFgeTTF623qrBq0lKwX0J7VFhnDPWbIO3Hn7QVRQpaODA2sWq95yDer+vU01tokuU\nsn/EJJ1J4zNibrsgqecs6IU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "cloudecommerce-1@cloudecommerce-1.iam.gserviceaccount.com",
+  "client_id": "109673339227435296376",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cloudecommerce-1%40cloudecommerce-1.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
