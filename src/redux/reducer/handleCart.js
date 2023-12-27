@@ -2,6 +2,7 @@ const cart = []
 
 const handleCart = (state=cart, action) =>{
     const product = action.payload
+    console.log('Action:', action);
     switch(action.type){
         case "ADDITEM":
             // Check if product already in cart
@@ -30,4 +31,4 @@ const handleCart = (state=cart, action) =>{
     }
 }
 
-export default handleCart
+export default handleCart;

@@ -1,13 +1,14 @@
 import React from 'react'
 import { Footer, Navbar } from "../components";
+import "./Pages.css";
 const AboutPage = () => {
   return (
     <>
       <Navbar />
       <div className="container my-3 py-3">
-        <h1 className="text-center">About Us</h1>
+        <h1 className="textcenter">About Us</h1>
         <hr />
-        <p  className="lead text-center"></p>
+        <p  className="lead textcenter"></p>
         <p>
         Welcome to our innovative cloud-based e-commerce platform! This project is the result of dedicated effort and creative collaboration as part of our university assessment. Our goal is not just to meet the academic requirements but to create something exciting and functional for users like you.
       </p>
@@ -24,37 +25,37 @@ const AboutPage = () => {
         Thank you for joining us on this exciting venture. Happy browsing!
       </p>
 
-        <h2 className="text-center py-4">Our Products</h2>
+        <h2 className="textcenter py-4">Our Products</h2>
         <div className="row">
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
               <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
-              <div className="card-body">
-                <h5 className="card-title text-center">Mens's Clothing</h5>
+              <div className=" cardbody">
+                <h5 className="card-title textcenter">Mens's Clothing</h5>
               </div>
             </div>
           </div>
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
               <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
-              <div className="card-body">
-                <h5 className="card-title text-center">Women's Clothing</h5>
+              <div className=" cardbody">
+                <h5 className="card-title textcenter">Women's Clothing</h5>
               </div>
             </div>
           </div>
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
               <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/1927259/pexels-photo-1927259.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
-              <div className="card-body">
-                <h5 className="card-title text-center">Jewelery</h5>
+              <div className=" cardbody">
+                <h5 className="card-title textcenter">Jewelery</h5>
               </div>
             </div>
           </div>
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
               <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
-              <div className="card-body">
-                <h5 className="card-title text-center">Electronics</h5>
+              <div className=" cardbody">
+                <h5 className="card-title textcenter">Electronics</h5>
               </div>
             </div>
           </div>

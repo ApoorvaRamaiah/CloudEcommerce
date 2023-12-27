@@ -1,4 +1,5 @@
 import React from "react";
+// import logo from "../../public/shopping.png"
 import { Footer, Navbar } from "../components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -18,43 +19,51 @@ const Payment = () => {
     // Configure the button by passing the payment request data as props
     return (
         <>
-            <GooglePayButton
-                environment="TEST"
-                paymentRequest={{
-                    apiVersion: 2,
-                    apiVersionMinor: 0,
-                    allowedPaymentMethods: [
-                        {
-                            type: 'CARD',
-                            parameters: {
-                                allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
-                                allowedCardNetworks: ['MASTERCARD', 'VISA'],
-                            },
-                            tokenizationSpecification: {
-                                type: 'PAYMENT_GATEWAY',
-                                parameters: {
-                                    gateway: 'example',
-                                    gatewayMerchantId: 'exampleGatewayMerchantId',
-                                },
-                            },
-                        },
-                    ],
-                    merchantInfo: {
-                        merchantId: '12345678901234567890',
-                        merchantName: 'Demo Merchant',
+            <div className="App">
+                {/* <h1> <img src={logo} className="" alt="logo"/></h1> */}
+                <h1>ased</h1>
+                <GooglePayButton
+    environment="TEST"
+    paymentRequest={{
+        apiVersion: 2,
+        apiVersionMinor: 0,
+        allowedPaymentMethods: [
+            {
+                type: 'CARD',
+                parameters: {
+                    allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                    allowedCardNetworks: ['MASTERCARD', 'VISA'],
+                },
+                tokenizationSpecification: {
+                    type: 'PAYMENT_GATEWAY',
+                    parameters: {
+                        gateway: 'example',
+                        gatewayMerchantId: 'exampleGatewayMerchantId',
                     },
-                    transactionInfo: {
-                        totalPriceStatus: 'FINAL',
-                        totalPriceLabel: 'Total',
-                        totalPrice: '100.00',
-                        currencyCode: 'USD',
-                        countryCode: 'US',
-                    },
-                }}
-                onLoadPaymentData={paymentRequest => {
-                    console.log('load payment data', paymentRequest);
-                }}
-            />
+                },
+            },
+        ],
+        merchantInfo: {
+            merchantId: '12345678901234567890',
+            merchantName: 'Demo Merchant',
+        },
+        transactionInfo: {
+            totalPriceStatus: 'FINAL',
+            totalPriceLabel: 'Total',
+            totalPrice: '100.00',
+            currencyCode: 'USD',
+            countryCode: 'US',
+        },
+    }}
+    onLoadPaymentData={(paymentRequest) => {
+        console.log('load payment data', paymentRequest);
+    }}
+    existingPaymentMethodRequired={false} // Corrected prop name and use boolean value
+    buttonColor="black"
+    buttonType="buy"
+/>
+
+            </div>
         </>
 
     )

@@ -6,7 +6,7 @@
 //     return (
 //             <Navbar />
 //             <div className="container my-3 py-3">
-//                 <h1 className="text-center">Register</h1>
+//                 <h1 className="textcenter">Register</h1>
 //                 <hr />
 //                 <div class="row my-4 h-100">
 //                     <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
@@ -41,7 +41,7 @@
 //                             <div className="my-3">
 //                                 <p>Already has an account? <Link to="/login" className="text-decoration-underline text-info">Login</Link> </p>
 //                             </div>
-//                             <div className="text-center">
+//                             <div className="textcenter">
 //                                 <button class="my-2 mx-auto btn btn-dark" type="submit">
 //                                     Register
 //                                 </button>
@@ -89,7 +89,7 @@
 //         <>
 //             <Navbar />
 //             <div className="container my-3 py-3">
-//                 <h1 className="text-center">Register</h1>
+//                 <h1 className="textcenter">Register</h1>
 //                 <hr />
 //                 <div class="row my-4 h-100">
 //                     <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
@@ -128,7 +128,7 @@
 //                             <div className="my-3">
 //                                 <p>Already has an account? <Link to="/login" className="text-decoration-underline text-info">Login</Link> </p>
 //                             </div>
-//                             <div className="text-center">
+//                             <div className="textcenter">
 //                                 <button class="my-2 mx-auto btn btn-dark" type="submit">
 //                                     Register
 //                                 </button>
@@ -177,7 +177,7 @@ const Register = () => {
         <>
             <Navbar />
             <div className="container my-3 py-3">
-                <h1 className="text-center">Register</h1>
+                <h1 className="textcenter">Register</h1>
                 <hr />
                 <div className="row my-4 h-100">
                     <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
@@ -216,7 +216,7 @@ const Register = () => {
                             <div className="my-3">
                                 <p>Already have an account? <Link to="/login" className="text-decoration-underline text-info">Login</Link> </p>
                             </div>
-                            <div className="text-center">
+                            <div className="textcenter">
                                 <button className="my-2 mx-auto btn btn-dark" type="submit">
                                     Register
                                 </button>
