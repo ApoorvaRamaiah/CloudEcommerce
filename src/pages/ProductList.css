@@ -1,0 +1,72 @@
+/* ProductList.css */
+
+.product-list-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.product-list-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.product-list-table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.product-list-form {
+  background-color: #f0f2f5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.form-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.form-button {
+  background-color: #1890ff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.form-button:hover {
+  background-color: #40a9ff;
+}
+
+.update-button,
+.add-button {
+  margin-right: 10px;
+}
+
+.edit-button,
+.delete-button {
+  color: #1890ff;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  color: #ff4d4f;
+}

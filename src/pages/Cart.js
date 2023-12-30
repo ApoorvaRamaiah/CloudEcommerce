@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Footer, Navbar } from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import { addCart, delCart } from "../redux/action";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { useHistory, useNavigate } from 'react-router-dom';
+import GooglePayment from "./GooglePayment";
 
 const Cart = () => {
   const state = useSelector((state) => state.handleCart);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const [showGooglePayment, setShowGooglePayment] = useState(false);
   const EmptyCart = () => {
     return (
       <div className="container">
@@ -17,8 +20,8 @@ const Cart = () => {
             <h4 className="p-3 display-5">Your Cart is Empty</h4>
             <Link to="/product" className="btn  btn-outline-dark mx-4">
               <i className="fa fa-arrow-left"></i> Continue Shopping
-            </Link> 
-          </div> 
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -91,7 +94,7 @@ const Cart = () => {
                                     removeItem(item);
                                   }}
                                 >
-                                  <i className="fas fa-minus"></i>
+                                  <i className="fa fa-minus"></i>
                                 </button>
 
                                 <p className="mx-5">{item.qty}</p>
@@ -102,7 +105,7 @@ const Cart = () => {
                                     addItem(item);
                                   }}
                                 >
-                                  <i className="fas fa-plus"></i>
+                                  <i className="fa fa-plus"></i>
                                 </button>
                               </div>
 
@@ -145,21 +148,55 @@ const Cart = () => {
                         </span>
                       </li>
                     </ul>
+                    <div className="text-center">
+                      {/* {state.length > 0 && (
+                        <>
+                          <button
+                            className="btn btn-dark btn-lg btn-block"
+                            onClick={() => setShowGooglePayment(true)}
+                          >
+                            Google Payment
+                          </button>
+                          {showGooglePayment && (
+                            <GooglePayment
+                              onClose={() => setShowGooglePayment(false)}
+                            />
+                          )}
+                        </>
+                      )} */}
+                      {/* {state.length > 0 && (
+                      <>
+                        <button
+                          className="btn btn-dark btn-lg btn-block"
+                          onClick={() => setShowGooglePayment(true)}
+                          disabled={showGooglePayment}
+                        >
+                          {showGooglePayment
+                            ? "Processing..."
+                            : "Buy with Google"}
+                        </button>
+                        {showGooglePayment && (
+                          <GooglePayment onClose={() => setShowGooglePayment(false)} />
+                        )}
+                      </>
+                    )} */}
+                          <GooglePayment />
 
-                    <Link
+                    </div>
+                    {/* <Link
                       to="/checkout"
                       className="btn btn-dark btn-lg btn-block"
                     >
                       Go to checkout
-                    </Link>
-                      {/* <NavLink
-    className="navbar-item"
-    activeClassName="is-active"
-    to="/googlepay"
-    exact
->
-	Google Payment
-</NavLink> */}
+                    </Link> */}
+                    {/* <Link
+                      className="navbar-item"
+                      activeClassName="is-active"
+                      to="/googlepayment"
+
+                    >
+                      Google Payment
+                    </Link> */}
                   </div>
                 </div>
               </div>

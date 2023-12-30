@@ -8,4 +8,4 @@ export { default as Register } from './Register';
 export { default as Checkout } from './Checkout';
 export { default as ProductList } from './ProductList';
 export { default as PageNotFound } from './PageNotFound';
-export { default as Payment } from './Payment';
+export { default as GooglePayment } from './GooglePayment';
