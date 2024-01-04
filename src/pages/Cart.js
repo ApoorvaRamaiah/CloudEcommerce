@@ -33,13 +33,36 @@ const Cart = () => {
   const removeItem = (product) => {
     dispatch(delCart(product));
   };
+  // const handleGooglePaymentClick = () => {
+  //   // Add your logic here to handle the Google Payment click
+  // };
+  const handleGooglePaymentClick = (cartData) => {
+    // Add your logic here to send data to the backend
+    console.log("Sending data to the backend:", cartData);
+    alert("Google Payment button clicked!");
 
+    // Example: You can use fetch to send data to your backend endpoint
+    // fetch("/your-backend-endpoint", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(cartData),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log("Backend response:", data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error sending data to the backend:", error);
+    //   });
+  };
   const ShowCart = () => {
     let subtotal = 0;
-    let shipping = 30.0;
+    let shipping = 5.0;
     let totalItems = 0;
     state.map((item) => {
-      return (subtotal += item.price * item.qty);
+      return (subtotal += item?.productPrice * item.qty);
     });
 
     state.map((item) => {
@@ -66,9 +89,9 @@ const Cart = () => {
                                 data-mdb-ripple-color="light"
                               >
                                 <img
-                                  src={item.image}
+                                  src={item?.productImage}
                                   // className="w-100"
-                                  alt={item.title}
+                                  alt={item?.productImage}
                                   width={100}
                                   height={75}
                                 />
@@ -77,7 +100,7 @@ const Cart = () => {
 
                             <div className="col-lg-5 col-md-6">
                               <p>
-                                <strong>{item.title}</strong>
+                                <strong>{item?.productName}</strong>
                               </p>
                               {/* <p>Color: blue</p>
                               <p>Size: M</p> */}
@@ -112,7 +135,7 @@ const Cart = () => {
                               <p className="text-start text-md-center">
                                 <strong>
                                   <span className="text-muted">{item.qty}</span>{" "}
-                                  x ${item.price}
+                                  x ${item?.productPrice}
                                 </strong>
                               </p>
                             </div>
@@ -180,7 +203,7 @@ const Cart = () => {
                         )}
                       </>
                     )} */}
-                          <GooglePayment />
+                          <GooglePayment onClick={handleGooglePaymentClick}> click</GooglePayment>
 
                     </div>
                     {/* <Link

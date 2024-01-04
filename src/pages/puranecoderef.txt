@@ -1,0 +1,79 @@
+ console.log ("auth",auth)
+  console.log ("getauth",getAuth)
+  console.log ("signInWithEmailAndPassword",signInWithEmailAndPassword)
+  const auth = getAuth();
+
+    const loginHandler = () => {
+      const auth = getAuth(); // Get auth object
+
+      // Hardcode email and password
+      const email = "John@gmail.com";
+      const password = "password";
+
+      console.log("email", email)
+      signInWithEmailAndPassword(auth, email, password)
+
+        .then((userCredential) => {
+          const userToken = userCredential.user.getIdToken();
+          console.log('User logged in:', userToken);
+          // Perform any additional actions after successful login
+
+          setToken(userToken);
+          localStorage.setItem("userToken", userToken);
+          navigate("/product"); // Redirect to home after successful login
+        })
+        .catch((error) => {
+          setError(error.message);
+          console.error('Login error:', error.message);
+        });
+   };
+  const loginHandler = async () => {
+    const auth = getAuth(); // Get auth object
+
+    // Hardcode email and password
+    // const email = "John@gmail.com";
+    // const password = "password";
+
+    console.log("email", email)
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userToken = userCredential.user.getIdTokenResult();
+      console.log('User logged in:', userCredential, userToken);
+      // Perform any additional actions after successful login
+
+      setToken(userToken);
+      localStorage.setItem("userToken", userToken);
+      navigate("/product"); // Redirect to home after successful login
+    } catch (error) {
+      setError(error.message);
+      console.error('Login error:', error.message);
+    }
+  };
+console.log("before",authState); 
+
+  const loginHandler = async (e) => {
+    const auth = getAuth(); // Get auth object
+    e.preventDefault();
+  
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userToken = await userCredential.user.getIdTokenResult(); // Await here
+      console.log('User logged in:', userCredential, userToken);
+  
+      // Perform any additional actions after successful login
+  
+      setToken(userToken.token); // Assuming getIdTokenResult returns an object with a 'token' property
+      localStorage.setItem("userToken", userToken.token);
+      navigate("/product"); // Redirect to home after successful login
+      // dispatch(login({
+      //   email:email,
+      //   password:password,
+        
+      // }))
+    } catch (error) {
+      setError(error.message);
+      console.error('Login error:', error.message);
+    }
+  };
+console.log("After",authState); 

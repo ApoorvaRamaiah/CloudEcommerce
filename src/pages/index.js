@@ -9,3 +9,4 @@ export { default as Checkout } from './Checkout';
 export { default as ProductList } from './ProductList';
 export { default as PageNotFound } from './PageNotFound';
 export { default as GooglePayment } from './GooglePayment';
+export { default as Orders } from './Orders';

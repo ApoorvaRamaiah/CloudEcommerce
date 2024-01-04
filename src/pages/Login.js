@@ -7,6 +7,7 @@ import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import "./Pages.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAuth, login, logout } from '../redux/reducer/authSlice';
+import { selectUser, ulogin, ulogout } from '../redux/reducer/userSlice';
 import { loginUser, logoutUser } from '../redux/action/authActions';
 
 const Login = (isAuthenticated) => {
@@ -19,91 +20,19 @@ const Login = (isAuthenticated) => {
   const auth = getAuth();
   const dispatch = useDispatch();
   const authState = useSelector(selectAuth);
+  const userState = useSelector(selectUser);
 
-  // console.log ("auth",auth)
-  // console.log ("getauth",getAuth)
-  // console.log ("signInWithEmailAndPassword",signInWithEmailAndPassword)
-  // const auth = getAuth();
-
-  //   const loginHandler = () => {
-  //     const auth = getAuth(); // Get auth object
-
-  //     // Hardcode email and password
-  //     const email = "John@gmail.com";
-  //     const password = "password";
-
-  //     console.log("email", email)
-  //     signInWithEmailAndPassword(auth, email, password)
-
-  //       .then((userCredential) => {
-  //         const userToken = userCredential.user.getIdToken();
-  //         console.log('User logged in:', userToken);
-  //         // Perform any additional actions after successful login
-
-  //         setToken(userToken);
-  //         localStorage.setItem("userToken", userToken);
-  //         navigate("/product"); // Redirect to home after successful login
-  //       })
-  //       .catch((error) => {
-  //         setError(error.message);
-  //         console.error('Login error:', error.message);
-  //       });
-  //  };
-  // const loginHandler = async () => {
-  //   const auth = getAuth(); // Get auth object
-
-  //   // Hardcode email and password
-  //   // const email = "John@gmail.com";
-  //   // const password = "password";
-
-  //   console.log("email", email)
-
-  //   try {
-  //     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-  //     const userToken = userCredential.user.getIdTokenResult();
-  //     console.log('User logged in:', userCredential, userToken);
-  //     // Perform any additional actions after successful login
-
-  //     setToken(userToken);
-  //     localStorage.setItem("userToken", userToken);
-  //     navigate("/product"); // Redirect to home after successful login
-  //   } catch (error) {
-  //     setError(error.message);
-  //     console.error('Login error:', error.message);
-  //   }
-  // };
-// console.log("before",authState); 
-
-  // const loginHandler = async (e) => {
-  //   const auth = getAuth(); // Get auth object
-  //   e.preventDefault();
-  
-  //   try {
-  //     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-  //     const userToken = await userCredential.user.getIdTokenResult(); // Await here
-  //     console.log('User logged in:', userCredential, userToken);
-  
-  //     // Perform any additional actions after successful login
-  
-  //     setToken(userToken.token); // Assuming getIdTokenResult returns an object with a 'token' property
-  //     localStorage.setItem("userToken", userToken.token);
-  //     navigate("/product"); // Redirect to home after successful login
-  //     // dispatch(login({
-  //     //   email:email,
-  //     //   password:password,
-        
-  //     // }))
-  //   } catch (error) {
-  //     setError(error.message);
-  //     console.error('Login error:', error.message);
-  //   }
-  // };
-// console.log("After",authState); 
+ console.log("user",userState)
 const loginHandler = useCallback(async (e) => {
   const auth = getAuth(); // Get auth object
   e.preventDefault();
 
   try {
+    const loginResponse = await fetch(`http://localhost:8080/login`);
+      const loginData = await loginResponse.json();
+
+      // Do something with loginData if needed
+      console.log("Login Data:", loginData);
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const userToken = await userCredential.user.getIdTokenResult();
 
@@ -111,7 +40,24 @@ const loginHandler = useCallback(async (e) => {
     localStorage.setItem("userToken", userToken.token);
     navigate("/product");
     // navigate.replace('/login');
-    dispatch(login()); // Dispatch the login action
+    // dispatch(login()); // Dispatch the login action
+    // dispatch(loginUser(user.email, user.displayName, user.uid, user.role));
+    //   // Redirect based on user role
+    //   if (user.role === 1) {
+    //     history.push("/admin"); // Redirect to admin page for role 1
+    //   } else {
+    //     history.push("/product"); // Redirect to product page for role 2
+    //   }
+    const userResponse = await fetch(`http://localhost:8080/user?email=${email}`);
+      const userData = await userResponse.json();
+
+      console.log("User Data:", userData);
+
+    dispatch(login({
+      email: email,
+      userType: userData.userType, // Assuming the user type is available in userData
+      loggedIn: true,
+    }));
   } catch (error) {
     setError(error.message);
     console.error('Login error:', error.message);
@@ -136,6 +82,20 @@ const loginHandler = useCallback(async (e) => {
       loggedIn:true
     }))
   }
+  // const registerUser = async (email, password) => {
+  //   try {
+  //     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  //     return userCredential.user;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // };
+  const handleKeyEnter = (e) => {
+    if (e.key === "Enter") {
+      // Trigger login action when the "Enter" key is pressed
+      loginHandler(e);
+    }
+  };
   return (
     <>
       <Navbar />
@@ -155,6 +115,7 @@ const loginHandler = useCallback(async (e) => {
                   id="floatingInput"
                   placeholder="name@example.com"
                   onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={handleKeyEnter}
                 />
               </div>
               <div className="my-3">
@@ -166,8 +127,14 @@ const loginHandler = useCallback(async (e) => {
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={handleKeyEnter}
                 />
               </div>
+              {error && (
+        <div className="alert alert-danger" role="alert">
+          {error}
+        </div>
+      )}
               {/* <div className="my-3">
                 <p>
                   New Here?{' '}

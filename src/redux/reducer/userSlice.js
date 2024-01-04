@@ -21,11 +21,10 @@ export const userSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
-    // other actions...
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { ulogin, ulogout } = userSlice.actions;
 // export const selectAuth = (state) => state.auth;
 export const selectUser = (state) => state.user.user;
 
