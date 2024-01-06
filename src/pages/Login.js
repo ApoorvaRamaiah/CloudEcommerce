@@ -50,7 +50,7 @@ const Login = (isAuthenticated) => {
   //   e.preventDefault();
 
   //   try {
-  //     // const loginResponse = await fetch(`http://localhost:8080/login`);
+  //     // const loginResponse = await fetch(`http://35.246.127.243:8080/login`);
   //     //   const loginData = await loginResponse.json();
   //     //   if (!loginData) {
   //     //     throw new Error("Empty or invalid response from the server");
@@ -72,7 +72,7 @@ const Login = (isAuthenticated) => {
   //     //   } else {
   //     //     history.push("/product"); // Redirect to product page for role 2
   //     //   }
-  //     const userResponse = await fetch(`http://localhost:8080/user?email=${email}`);
+  //     const userResponse = await fetch(`http://35.246.127.243:8080/user?email=${email}`);
   //     const userData = await userResponse.json();
 
   //     console.log("User Data:", userResponse, userData);
@@ -98,7 +98,7 @@ const Login = (isAuthenticated) => {
       localStorage.setItem("userToken", userToken.token);
   
       // Make API request to increment user count
-      const loginResponse = await fetch(`http://localhost:8080/login`, {
+      const loginResponse = await fetch(`http://35.246.127.243:8080/login`, {
         method: 'GET',
       });
   
@@ -109,7 +109,7 @@ const Login = (isAuthenticated) => {
       }
   
   
-      const userResponse = await fetch(`http://localhost:8080/user?email=${email}`);
+      const userResponse = await fetch(`http://35.246.127.243:8080/user?email=${email}`);
       const userData = await userResponse.json();
   
       console.log("User Data:", userResponse, userData);
@@ -144,7 +144,7 @@ const Login = (isAuthenticated) => {
     .catch((error) => {
       console.error('Logout error:', error.message);
     });
-    fetch(`http://localhost:8080/logout`, {
+    fetch(`http://35.246.127.243:8080/logout`, {
       method: 'GET',
     })
     .then(response => response.json())

@@ -22,7 +22,7 @@ const Products = () => {
   useEffect(() => {
     const getProducts = async () => {
       setLoading(true);
-      const response = await fetch("http://localhost:8080/product");
+      const response = await fetch("http://35.246.127.243:8080/product");
       if (componentMounted) {
         setData(await response.clone().json());
         setFilter(await response.json());

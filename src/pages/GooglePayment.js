@@ -39,7 +39,7 @@ const GooglePayment = ({ totalAmount, onGooglePayClick, location, productId }) =
     calculateTotalAmount();
 
     try {
-      const cartResponse = await fetch("http://localhost:8080/cart", {
+      const cartResponse = await fetch("http://35.246.127.243:8080/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +62,7 @@ const GooglePayment = ({ totalAmount, onGooglePayClick, location, productId }) =
         const receivedCartId = cartData.id;
         setCartId(receivedCartId);
         console.log("id", cartData)
-        const orderResponse = await fetch("http://localhost:8080/order/create", {
+        const orderResponse = await fetch("http://35.246.127.243:8080/order/create", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

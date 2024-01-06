@@ -23,7 +23,7 @@
 //     // Fetch orders from the API when the component mounts
 //     const fetchOrders = async () => {
 //       try {
-//         const response = await fetch('http://localhost:8080/order');
+//         const response = await fetch('http://35.246.127.243:8080/order');
 //         const data = await response.json();
 //         console.log("data",data, response)
 //         setOrders(data);
@@ -158,7 +158,7 @@ const Orders = () => {
   //   // Fetch orders from the API when the component mounts
   //   const fetchOrders = async () => {
   //     try {
-  //       const response = await fetch('http://localhost:8080/order');
+  //       const response = await fetch('http://35.246.127.243:8080/order');
   //       const data = await response.json();
   //       setOrders(data);
   //     } catch (error) {
@@ -171,7 +171,7 @@ const Orders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch('http://localhost:8080/order');
+        const response = await fetch('http://35.246.127.243:8080/order');
         const data = await response.json();
         setOrders(data);
       } catch (error) {
@@ -188,7 +188,7 @@ const Orders = () => {
 
   // const handleShipment = async (record) => {
   //   try {
-  //     const response = await fetch(`http://localhost:8080/order/${record.orderId}/update-shipped?shipped=true`, {
+  //     const response = await fetch(`http://35.246.127.243:8080/order/${record.orderId}/update-shipped?shipped=true`, {
   //       method: 'PATCH',
   //       headers: {
   //         'Content-Type': 'application/json',
@@ -221,7 +221,7 @@ const Orders = () => {
   
   const handleShipment = async (record) => {
     try {
-      const response = await fetch(`http://localhost:8080/order/${record.orderId}/update-shipped?shipped=true`, {
+      const response = await fetch(`http://35.246.127.243:8080/order/${record.orderId}/update-shipped?shipped=true`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -294,7 +294,7 @@ const Orders = () => {
   ];
   // const handleShipment = async (record) => {
   //   try {
-  //     const response = await fetch(`http://localhost:8080/order/${record.orderId}/update-shipped?shipped=true`, {
+  //     const response = await fetch(`http://35.246.127.243:8080/order/${record.orderId}/update-shipped?shipped=true`, {
   //       method: 'PATCH',
   //       headers: {
   //         'Content-Type': 'application/json',

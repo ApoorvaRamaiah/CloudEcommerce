@@ -34,7 +34,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       // Make API request to decrement user count
-      const logoutResponse = await fetch(`http://localhost:8080/logout`, {
+      const logoutResponse = await fetch(`http://35.246.127.243:8080/logout`, {
         method: 'GET',
       });
 

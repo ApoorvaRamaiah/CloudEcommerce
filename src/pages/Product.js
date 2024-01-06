@@ -24,13 +24,13 @@ const Product = () => {
     const getProduct = async () => {
       setLoading(true);
       setLoading2(true);
-      const response = await fetch(`http://localhost:8080/product/${id}`);
+      const response = await fetch(`http://35.246.127.243:8080/product/${id}`);
       const data = await response.json();
       setProduct(data);
       setLoading(false);
       // const response2 = await fetch(
-        // `http://localhost:8080/product/type/${data?.productType}`
-      //   `http://localhost:8080/product/type/electronics`
+        // `http://35.246.127.243:8080/product/type/${data?.productType}`
+      //   `http://35.246.127.243:8080/product/type/electronics`
       // );
       // const data2 = await response2.json();
       console.log("res1", response)

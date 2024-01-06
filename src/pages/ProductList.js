@@ -19,7 +19,7 @@ const ProductList = () => {
 
   useEffect(() => {
     // Fetch products from API when component mounts
-    fetch('http://localhost:8080/product')
+    fetch('http://35.246.127.243:8080/product')
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error('Error fetching products:', error));
@@ -108,7 +108,7 @@ const ProductList = () => {
       orderId: generateOrderId(), // Generate and assign order ID
     };
 
-    fetch('http://localhost:8080/product', {
+    fetch('http://35.246.127.243:8080/product', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -138,7 +138,7 @@ const ProductList = () => {
 
   const handleDeleteProduct = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/product/${id}`, {
+      const response = await fetch(`http://35.246.127.243:8080/product/${id}`, {
         method: 'DELETE',
       });
 
@@ -164,7 +164,7 @@ const ProductList = () => {
   //   // Send a PUT request to update the product
   //   const updatedProduct = { ...currentProduct, orderId: orderId };
 
-  //   fetch(`http://localhost:8080/product/${updatedProduct.productId}/update-details`, {
+  //   fetch(`http://35.246.127.243:8080/product/${updatedProduct.productId}/update-details`, {
   //     method: 'PUT',
   //     headers: {
   //       'Content-Type': 'application/json',
@@ -213,7 +213,7 @@ const ProductList = () => {
       updatedProduct.orderId = generateOrderId(); // Generate and assign order ID
     }
 
-    fetch(`http://localhost:8080/product/${updatedProduct.productId}/update-details`, {
+    fetch(`http://35.246.127.243:8080/product/${updatedProduct.productId}/update-details`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -327,7 +327,7 @@ const ProductList = () => {
   // };
   // const uploadProps = {
   //   name: 'file',
-  //   action: http://localhost:8080/product/{productId}/update-details', // Replace with your upload API endpoint
+  //   action: http://35.246.127.243:8080/product/{productId}/update-details', // Replace with your upload API endpoint
   //   headers: {
   //     authorization: 'authorization-text',
   //   },

@@ -484,7 +484,7 @@ console.log("After",authState);
 
 //   useEffect(() => {
 //     // Fetch products from API when component mounts
-//     fetch('http://localhost:8080/product')
+//     fetch('http://35.246.127.243:8080/product')
 //       .then((response) => response.json())
 //       .then((data) => setProducts(data))
 //       .catch((error) => console.error('Error fetching products:', error));
@@ -554,7 +554,7 @@ console.log("After",authState);
 
 //   // const handleAddProduct = () => {
 //   //   // Send a POST request to add a new product
-//   //   fetch('http://localhost:8080/product', {
+//   //   fetch('http://35.246.127.243:8080/product', {
 //   //     method: 'POST',
 //   //     headers: {
 //   //       'Content-Type': 'application/json',
@@ -590,7 +590,7 @@ console.log("After",authState);
 //     // Add the order ID to the product
 //     newProduct.orderId = orderId;
 
-//     fetch('http://localhost:8080/product', {
+//     fetch('http://35.246.127.243:8080/product', {
 //       method: 'POST',
 //       headers: {
 //         'Content-Type': 'application/json',
@@ -620,7 +620,7 @@ console.log("After",authState);
 
 //   const handleDeleteProduct = async (id) => {
 //     try {
-//         const response = await fetch(`http://localhost:8080/product/${id}`, {
+//         const response = await fetch(`http://35.246.127.243:8080/product/${id}`, {
 //             method: 'DELETE',
 //         });
 
@@ -649,7 +649,7 @@ console.log("After",authState);
 //     // Add the order ID to the product
 //     updatedProduct.orderId = orderId;
 
-//     fetch(`http://localhost:8080/product/${updatedProduct.productId}`, {
+//     fetch(`http://35.246.127.243:8080/product/${updatedProduct.productId}`, {
 //       method: 'PUT',
 //       headers: {
 //         'Content-Type': 'application/json',
