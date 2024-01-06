@@ -77,3 +77,949 @@ console.log("before",authState);
     }
   };
 console.log("After",authState); 
+
+
+// import React from 'react';
+// import { NavLink, useNavigate } from 'react-router-dom';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { selectAuth, loginUser, logoutUser } from '../redux/reducer/authSlice';
+// import "../pages/Pages.css";
+
+// const Navbar = () => {
+//   const cartState = useSelector(state => state.handleCart);
+//   const authState = useSelector(selectAuth);
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+
+//   // const handleLogin = () => {
+//   //   dispatch(loginUser());
+//   // };
+
+//   // const handleLogout = () => {
+//   //   dispatch(logoutUser());
+//   //   localStorage.removeItem("userToken");
+//   //   navigate("/login");
+//   // };
+//   const handleLogin = () => {
+//     // Call the loginUser action to tell the box to log in
+//     dispatch(loginUser());
+//   };
+//   const handleLogout = () => {
+//     dispatch(logoutUser()); // Assuming you have a logout action in your authSlice
+
+//     // Add any additional logout logic here, such as clearing local storage, navigating, etc.
+//     // For example:
+//     localStorage.removeItem("userToken");
+//     navigate("/login");
+//   }
+//   console.log(authState);
+//   return (
+//     <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
+//       <div className="container">
+//         <NavLink className="navbar-brand fw-bold fs-4 px-2" to="/"> Shop Top! </NavLink>
+//         <button className="navbar-toggler mx-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+//           <span className="navbar-toggler-icon"></span>
+//         </button>
+
+//         <div className="collapse navbar-collapse" id="navbarSupportedContent">
+//           <ul className="navbar-nav m-auto my-2 textcenter">
+//             <li className="nav-item">
+//               <NavLink className="nav-link" to="/about">About</NavLink>
+//             </li>
+//             {/* {authState.isAuthenticated && authState.userType === 1 && (
+//               <>
+//                 <li className="nav-item">
+//                   <NavLink className="nav-link" to="/product">Products</NavLink>
+//                 </li>
+//                 <li className="nav-item">
+//                   <NavLink className="nav-link" to="/orders">Orders</NavLink>
+//                 </li>
+//               </>
+//             )} */}
+//           </ul>
+
+//           <div className="buttons textcenter">
+//             {authState.isAuthenticated ? (
+//               <>
+//                 <NavLink to="/cart" className="btn btn-outline-dark m-2">
+//                   <i className="fa fa-cart-shopping mr-1"></i> Cart ({cartState?.length > 0 ? `${cartState?.length}` : '0'})
+//                 </NavLink>
+//                 <NavLink to="/login" className="btn btn-outline-dark m-2" onClick={handleLogout}>
+//                   <i className="fa fa-cart-shopping mr-1"></i> Logout
+//                 </NavLink>
+//               </>
+//             ) : (
+//               <>
+//                 <NavLink to="/login" className="btn btn-outline-dark m-2" onClick={handleLogin}>
+//                   <i className="fa fa-sign-in-alt mr-1"></i> Login
+//                 </NavLink>
+//                 <NavLink to="/register" className="btn btn-outline-dark m-2">
+//                   <i className="fa fa-user-plus mr-1"></i> Register
+//                 </NavLink>
+//               </>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//     </nav>
+//   );
+// };
+
+// export default Navbar;
+// import React, { useState } from 'react';
+// import { useDropzone } from 'react-dropzone';
+// import '../App.css';
+
+// const initialProduct = { id: '', name: '', price: '', status: 'pending', image: null };
+
+// const ProductList = () => {
+//   const [products, setProducts] = useState([
+//     { id: 1, name: 'Product 1', price: '$10', status: 'pending', image: null },
+//     { id: 2, name: 'Product 2', price: '$20', status: 'pending', image: null },
+//     // Add more initial products as needed
+//   ]);
+
+//   const [currentProduct, setCurrentProduct] = useState(initialProduct);
+
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setCurrentProduct({ ...currentProduct, [name]: value });
+//   };
+
+//   const handleAddProduct = () => {
+//     setProducts([
+//       ...products,
+//       { ...currentProduct, id: products.length + 1, status: 'pending', image: null },
+//     ]);
+//     setCurrentProduct(initialProduct);
+//   };
+
+//   const handleDeleteProduct = (id) => {
+//     setProducts(products.filter((product) => product.id !== id));
+//   };
+
+//   const handleEditProduct = (product) => {
+//     setCurrentProduct(product);
+//   };
+
+//   const handleUpdateProduct = () => {
+//     setProducts(products.map((p) => (p.id === currentProduct.id ? currentProduct : p)));
+//     setCurrentProduct(initialProduct);
+//   };
+
+//   const handleShipProduct = (id) => {
+//     const product = products.find((p) => p.id === id);
+
+//     if (product.status === 'pending') {
+//       console.log(`Product with ID ${id} has been shipped.`);
+
+//       setProducts((prevProducts) =>
+//         prevProducts.map((p) => (p.id === id ? { ...p, status: 'shipped' } : p))
+//       );
+//     }
+//   };
+
+//   const onDrop = (acceptedFiles) => {
+//     const file = acceptedFiles[0];
+
+//     if (file) {
+//       const reader = new FileReader();
+
+//       reader.onload = () => {
+//         setCurrentProduct({ ...currentProduct, image: { file, preview: reader.result } });
+//       };
+
+//       reader.readAsDataURL(file);
+//     }
+//   };
+
+//   const { getRootProps, getInputProps } = useDropzone({
+//     onDrop,
+//     accept: 'image/jpeg, image/jpg, image/png, image/gif',
+//     multiple: false,
+//   });
+
+//   return (
+//     <div className="app-container">
+//       <h1 className="app-title">Product List</h1>
+//       <table className="app-table">
+//         <thead>
+//           <tr>
+//             <th>ID</th>
+//             <th>Name</th>
+//             <th>Price</th>
+//             <th>Image</th>
+//             <th>Status</th>
+//             <th>Action</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {products.map((product) => (
+//             <tr key={product.id}>
+//               <td>{product.id}</td>
+//               <td>{product.name}</td>
+//               <td>{product.price}</td>
+//               <td>
+//                 {product.image && (
+//                   <img src={product.image.preview} alt="Product" style={{ width: '50px' }} />
+//                 )}
+//                 <div {...getRootProps()} style={{ cursor: 'pointer', marginTop: '5px' }}>
+//                   <input {...getInputProps()} />
+//                   Drag & Drop or Click to upload
+//                 </div>
+//               </td>
+//               <td>{product.status}</td>
+//               <td>
+//                 <button className="app-edit" onClick={() => handleEditProduct(product)}>
+//                   Edit
+//                 </button>
+//                 <button className="app-delete" onClick={() => handleDeleteProduct(product.id)}>
+//                   Delete
+//                 </button>
+//                 {product.status === 'pending' && (
+//                   <button className="app-ship" onClick={() => handleShipProduct(product.id)}>
+//                     Ship Now
+//                   </button>
+//                 )}
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+
+//       <div className="app-form">
+//         <h2 className="app-form-title">Add / Update Product</h2>
+//         <label>
+//           Name:
+//           <input type="text" name="name" value={currentProduct.name} onChange={handleInputChange} />
+//         </label>
+//         <label>
+//           Price:
+//           <input type="text" name="price" value={currentProduct.price} onChange={handleInputChange} />
+//         </label>
+//         {currentProduct.id ? (
+//           <button className="app-update" onClick={handleUpdateProduct}>
+//             Update
+//           </button>
+//         ) : (
+//           <button className="app-add" onClick={handleAddProduct}>
+//             Add
+//           </button>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ProductList;
+
+// import React, { useState } from 'react';
+// import { Table, Button, Input, Upload, message, Popconfirm } from 'antd';
+// import { UploadOutlined } from '@ant-design/icons';
+// import image from './images/shopping.png'
+// import './ProductList.css'; // Import the CSS file
+// const ProductList = () => {
+//   const [products, setProducts] = useState([
+//     { id: 1, name: 'Product 1', price: '$10', image: image },
+//     { id: 2, name: 'Product 2', price: '$20', image: image },
+//     // Add more initial products as needed
+//   ]);
+
+//   const [currentProduct, setCurrentProduct] = useState({
+//     id: '',
+//     name: '',
+//     price: '',
+//     image: '',
+//   });
+
+//   const columns = [
+//     {
+//       title: 'ID',
+//       dataIndex: 'id',
+//       key: 'id',
+//     },
+//     {
+//       title: 'Name',
+//       dataIndex: 'name',
+//       key: 'name',
+//     },
+//     {
+//       title: 'Price',
+//       dataIndex: 'price',
+//       key: 'price',
+//     },
+//     {
+//       title: 'Image',
+//       dataIndex: 'image',
+//       key: 'image',
+//       render: (text, record) => (
+//         <img src={text} alt={`Product ${record.id}`} style={{ maxWidth: '50px', maxHeight: '50px' }} />
+//       ),
+//     },
+//     {
+//       title: 'Action',
+//       key: 'action',
+//       render: (text, record) => (
+//         <span>
+//           <Button type="link" onClick={() => handleEditProduct(record)}>
+//             Edit
+//           </Button>
+//           <Popconfirm title="Sure to delete?" onConfirm={() => handleDeleteProduct(record.id)}>
+//             <Button type="link" danger>
+//               Delete
+//             </Button>
+//           </Popconfirm>
+//         </span>
+//       ),
+//     },
+//   ];
+
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setCurrentProduct({ ...currentProduct, [name]: value });
+//   };
+
+//   const handleAddProduct = () => {
+//     setProducts([...products, { ...currentProduct, id: products.length + 1 }]);
+//     setCurrentProduct({ id: '', name: '', price: '', image: '' });
+//   };
+
+//   const handleDeleteProduct = (id) => {
+//     setProducts(products.filter((product) => product.id !== id));
+//   };
+
+//   const handleEditProduct = (product) => {
+//     setCurrentProduct(product);
+//   };
+
+//   const handleUpdateProduct = () => {
+//     setProducts(products.map((p) => (p.id === currentProduct.id ? currentProduct : p)));
+//     setCurrentProduct({ id: '', name: '', price: '', image: '' });
+//   };
+
+//   const uploadProps = {
+//     name: 'file',
+//     showUploadList: false,
+//     beforeUpload: (file) => {
+//       // Validate file type
+//       const isImage = file.type.startsWith('image/');
+//       if (!isImage) {
+//         message.error('You can only upload image files!');
+//       } else {
+//         // Display image preview
+//         const reader = new FileReader();
+//         reader.readAsDataURL(file);
+//         reader.onloadend = () => {
+//           setCurrentProduct({ ...currentProduct, image: reader.result });
+//         };
+//       }
+//       return false; // Prevent default upload behavior
+//     },
+//   };
+
+//   return (
+//     <div className="container my-3 py-3">
+//       <h1>Product List</h1>
+//       <Table dataSource={products} columns={columns} rowKey="id" />
+
+//       <div style={{ margin: '20px 0', display: 'flex',  }}>
+//         <Input
+//           placeholder="Product Name"
+//           name="name"
+//           value={currentProduct.name}
+//           onChange={handleInputChange}
+//         />
+//         <Input
+//           placeholder="Product Price"
+//           name="price"
+//           value={currentProduct.price}
+//           onChange={handleInputChange}
+//         />
+//         <Upload {...uploadProps}>
+//           <Button icon={<UploadOutlined />}>Upload Image</Button>
+//         </Upload>
+//         {currentProduct.id ? (
+//           <Button type="primary" onClick={handleUpdateProduct}>
+//             Update Product
+//           </Button>
+//         ) : (
+//           <Button type="primary" onClick={handleAddProduct}>
+//             Add Product
+//           </Button>
+//         )}
+//         {currentProduct.id ? (
+//           <Button type="primary" onClick={handleUpdateProduct}>
+//             Update Product
+//           </Button>
+//         ) : (
+//           <Button type="primary" onClick={handleAddProduct}>
+//             Add Product
+//           </Button>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ProductList;
+
+// import React, { useState, useEffect } from 'react';
+// import { Table, Button, Input, Upload, message, Popconfirm } from 'antd';
+// import { UploadOutlined } from '@ant-design/icons';
+// import './ProductList.css'; // Import the CSS file
+
+// const ProductList = () => {
+//   const [products, setProducts] = useState([]);
+//   const [currentProduct, setCurrentProduct] = useState({
+//     productId: '',
+//     productName: '',
+//     productQuantity: 0,
+//     productPrice: 0,
+//     productType: '',
+//     productImage: '',
+//     productDescription: '',
+//     orderId: '', // Add orderId property
+//   });
+//   const [orderId, setOrderId] = useState('');
+
+//   useEffect(() => {
+//     // Fetch products from API when component mounts
+//     fetch('http://localhost:8080/product')
+//       .then((response) => response.json())
+//       .then((data) => setProducts(data))
+//       .catch((error) => console.error('Error fetching products:', error));
+//   }, []);
+
+//   const columns = [
+//     {
+//       title: 'Product ID',
+//       dataIndex: 'productId',
+//       key: 'productId',
+//     },
+//     {
+//       title: 'Product Name',
+//       dataIndex: 'productName',
+//       key: 'productName',
+//     },
+//     {
+//       title: 'Product Quantity',
+//       dataIndex: 'productQuantity',
+//       key: 'productQuantity',
+//     },
+//     {
+//       title: 'Product Price',
+//       dataIndex: 'productPrice',
+//       key: 'productPrice',
+//     },
+//     {
+//       title: 'Product Type',
+//       dataIndex: 'productType',
+//       key: 'productType',
+//     },
+//     {
+//       title: 'Product Image',
+//       dataIndex: 'productImage',
+//       key: 'productImage',
+//       render: (text, record) => (
+//         <img src={text} alt={`Product ${record.productId}`} style={{ maxWidth: '50px', maxHeight: '50px' }} />
+//       ),
+//     },
+//     {
+//       title: 'Product Description',
+//       dataIndex: 'productDescription',
+//       key: 'productDescription',
+//     },
+//     {
+//       title: 'Action',
+//       key: 'action',
+//       render: (text, record) => (
+//         <span>
+//           <Button type="link" onClick={() => handleEditProduct(record)}>
+//             Edit
+//           </Button>
+//           <Popconfirm title="Sure to delete?" onConfirm={() => handleDeleteProduct(record.productId)}>
+//             <Button type="link" danger>
+//               Delete
+//             </Button>
+//           </Popconfirm>
+//         </span>
+//       ),
+//     },
+//   ];
+
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setCurrentProduct({ ...currentProduct, [name]: value });
+//   };
+
+//   // const handleAddProduct = () => {
+//   //   // Send a POST request to add a new product
+//   //   fetch('http://localhost:8080/product', {
+//   //     method: 'POST',
+//   //     headers: {
+//   //       'Content-Type': 'application/json',
+//   //     },
+//   //     body: JSON.stringify(currentProduct),
+//   //   })
+//   //     .then((response) => response.json())
+//   //     .then((newProduct) => {
+//   //       setProducts([...products, newProduct]);
+//   //       setCurrentProduct({
+//   //         productId: '',
+//   //         productName: '',
+//   //         productQuantity: 0,
+//   //         productPrice: 0,
+//   //         productType: '',
+//   //         productImage: '',
+//   //         productDescription: '',
+//   //       });
+//   //       message.success('Product added successfully!');
+//   //     })
+//   //     .catch((error) => {
+//   //       console.error('Error adding product:', error);
+//   //       message.error('Error adding product. Please try again.');
+//   //     });
+//   // };
+//   const handleAddProduct = () => {
+//     // Send a POST request to add a new product
+//     const newProduct = {
+//       ...currentProduct,
+//       id: products.length + 1,
+//     };
+
+//     // Add the order ID to the product
+//     newProduct.orderId = orderId;
+
+//     fetch('http://localhost:8080/product', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(newProduct),
+//     })
+//       .then((response) => response.json())
+//       .then((addedProduct) => {
+//         setProducts([...products, addedProduct]);
+//         setCurrentProduct({
+//           productId: '',
+//           productName: '',
+//           productQuantity: 0,
+//           productPrice: 0,
+//           productType: '',
+//           productImage: '',
+//           productDescription: '',
+//         });
+//         setOrderId(''); // Clear order ID after adding a product
+//         message.success('Product added successfully!');
+//       })
+//       .catch((error) => {
+//         console.error('Error adding product:', error);
+//         message.error('Error adding product. Please try again.');
+//       });
+//   };
+
+//   const handleDeleteProduct = async (id) => {
+//     try {
+//         const response = await fetch(`http://localhost:8080/product/${id}`, {
+//             method: 'DELETE',
+//         });
+
+//         if (!response.ok) {
+//             throw new Error(`Error deleting product: ${response.statusText}`);
+//         }
+
+//         // Update state or perform any other actions after successful deletion
+//         console.log(`Product with ID ${id} deleted successfully`);
+//         alert(`Product with ID ${id} deleted successfully`)
+
+//     } catch (error) {
+//         console.error('Error deleting product:', error.message); // Log the error message
+//     }
+// };
+
+
+//   const handleEditProduct = (product) => {
+//     setCurrentProduct(product);
+//   };
+
+//   const handleUpdateProduct = () => {
+//     // Send a PUT request to update the product
+//     const updatedProduct = { ...currentProduct };
+
+//     // Add the order ID to the product
+//     updatedProduct.orderId = orderId;
+
+//     fetch(`http://localhost:8080/product/${updatedProduct.productId}`, {
+//       method: 'PUT',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(updatedProduct),
+//     })
+//       .then((response) => response.json())
+//       .then((updatedProduct) => {
+//         setProducts(products.map((p) => (p.productId === updatedProduct.productId ? updatedProduct : p)));
+//         setCurrentProduct({
+//           productId: '',
+//           productName: '',
+//           productQuantity: 0,
+//           productPrice: 0,
+//           productType: '',
+//           productImage: '',
+//           productDescription: '',
+//         });
+//         setOrderId(''); // Clear order ID after updating a product
+//         message.success('Product updated successfully!');
+//       })
+//       .catch((error) => {
+//         console.error('Error updating product:', error);
+//         message.error('Error updating product. Please try again.');
+//       });
+//   };
+
+//   const uploadProps = {
+//     name: 'file',
+//     showUploadList: false,
+//     beforeUpload: (file) => {
+//       // Validate file type
+//       const isImage = file.type.startsWith('image/');
+//       if (!isImage) {
+//         message.error('You can only upload image files!');
+//       } else {
+//         // Display image preview
+//         const reader = new FileReader();
+//         reader.readAsDataURL(file);
+//         reader.onloadend = () => {
+//           setCurrentProduct({ ...currentProduct, productImage: reader.result });
+//         };
+//       }
+//       return false; // Prevent default upload behavior
+//     },
+//   };
+
+//   return (
+//     <div className="container my-3 py-3">
+//       <h1>Product List</h1>
+//       <Table dataSource={products} columns={columns} rowKey="productId" />
+
+//       <div style={{ margin: '20px 0', display: 'flex', }}>
+//         <Input
+//           placeholder="Product ID"
+//           name="productId"
+//           value={currentProduct.productId}
+//           onChange={handleInputChange}
+//         />
+//         <Input
+//           placeholder="Product Name"
+//           name="productName"
+//           value={currentProduct.productName}
+//           onChange={handleInputChange}
+//         />
+//         <Input
+//           placeholder="Product Quantity"
+//           name="productQuantity"
+//           value={currentProduct.productQuantity}
+//           onChange={handleInputChange}
+//         />
+//         <Input
+//           placeholder="Product Price"
+//           name="productPrice"
+//           value={currentProduct.productPrice}
+//           onChange={handleInputChange}
+//         />
+//         <Input
+//           placeholder="Product Type"
+//           name="productType"
+//           value={currentProduct.productType}
+//           onChange={handleInputChange}
+//         />
+//         <Input
+//           placeholder="Product Description"
+//           name="productDescription"
+//           value={currentProduct.productDescription}
+//           onChange={handleInputChange}
+//         />
+//         <Upload {...uploadProps}>
+//           <Button icon={<UploadOutlined />}>Upload Image</Button>
+//         </Upload>
+//         {currentProduct.productId ? (
+//           <Button type="primary" onClick={handleUpdateProduct}>
+//             Update Product
+//           </Button>
+//         ) : (
+//           <Button type="primary" onClick={handleAddProduct}>
+//             Add Product
+//           </Button>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ProductList;
+
+// import React from "react";
+// // import logo from "../../public/shopping.png"
+// import { useSelector } from "react-redux";
+// import GooglePayButton  from "@google-pay/button-react";
+
+
+// const GooglePayment = (onGooglePaymentClick) => {
+//     const state = useSelector((state) => state.handleCart);
+//     let subtotal = 0;
+//     let shipping = 5.0;
+//     let totalItems = 0;
+//     // state.map((item) => {
+//     //     return (subtotal += item.price * item.qty);
+//     // });
+//     // state.map((item) => {
+//     //     return (totalItems += item.qty);
+//     // })
+//     state.forEach((item) => {
+//         subtotal += item.price * item.qty;
+//         totalItems += item.qty;
+//       });
+
+//     // Configure the button by passing the payment request data as props
+//     return (
+//         <>
+//             <div className="App">
+//                 <GooglePayButton
+//                 //   onClick={() => {
+//                 //     // You can perform any necessary actions before sending data to the backend
+//                 //     console.log("Preparing to send data to the backend");
+
+//                 //     // Call the function passed as a prop to trigger the backend operation
+//                 //     onGooglePaymentClick(state);
+//                 //   }}
+//                     environment="TEST"
+//                     paymentRequest={{
+//                         apiVersion: 2,
+//                         apiVersionMinor: 0,
+//                         allowedPaymentMethods: [
+//                             {
+//                                 type: 'CARD',
+//                                 parameters: {
+//                                     allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+//                                     allowedCardNetworks: ['MASTERCARD', 'VISA'],
+//                                 },
+//                                 tokenizationSpecification: {
+//                                     type: 'PAYMENT_GATEWAY',
+//                                     parameters: {
+//                                         gateway: 'example',
+//                                         gatewayMerchantId: 'exampleGatewayMerchantId',
+//                                     },
+//                                 },
+//                             },
+//                         ],
+//                         merchantInfo: {
+//                             merchantId: '12345678901234567890',
+//                             merchantName: 'Demo Merchant',
+//                         },
+//                         transactionInfo: {
+//                             totalPriceStatus: 'FINAL',
+//                             totalPriceLabel: 'Total',
+//                             totalPrice: '100.00',
+//                             currencyCode: 'USD',
+//                             countryCode: 'US',
+//                         },
+//                     }}
+//                     onLoadPaymentData={(paymentRequest) => {
+//                         console.log('load payment data', paymentRequest);
+//                     }}
+//                     existingPaymentMethodRequired={false} // Corrected prop name and use boolean value
+//                     buttonColor="black"
+//                     buttonType="buy"
+//                 />
+
+//             </div>
+//         </>
+
+//     )
+// };
+
+
+// export default GooglePayment;
+
+// import React, { useState } from "react";
+// import { Footer, Navbar } from "../components";
+// import { useSelector, useDispatch } from "react-redux";
+// import { addCart, delCart } from "../redux/action";
+// import { Link } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
+// import { useHistory, useNavigate } from 'react-router-dom';
+// import GooglePayment from "./GooglePayment";
+
+// const Cart = () => {
+//   const state = useSelector((state) => state.handleCart);
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+//   const [showGooglePayment, setShowGooglePayment] = useState(false);
+
+//   const EmptyCart = () => {
+//     return (
+//       <div className="container">
+//         <div className="row">
+//           <div className="col-md-12 py-5 bg-light text-center">
+//             <h4 className="p-3 display-5">Your Cart is Empty</h4>
+//             <Link to="/product" className="btn  btn-outline-dark mx-4">
+//               <i className="fa fa-arrow-left"></i> Continue Shopping
+//             </Link>
+//           </div>
+//         </div>
+//       </div>
+//     );
+//   };
+
+//   const ShowCart = () => {
+//     let subtotal = 0;
+//     let shipping = 5.0;
+//     let totalItems = 0;
+
+//     state.map((item) => {
+//       subtotal += item?.productPrice * item.qty;
+//       totalItems += item.qty;
+//       return null; // To satisfy React, as map requires a return
+//     });
+
+//     const addItem = (product) => {
+//       dispatch(addCart(product));
+//     };
+//     const removeItem = (product) => {
+//       dispatch(delCart(product));
+//     };
+//     return (
+//       <>
+//         <section className="h-100 gradient-custom">
+//           <div className="container py-5">
+//             <div className="row d-flex justify-content-center my-4">
+//               <div className="col-md-8">
+//                 <div className="card mb-4">
+//                   <div className="card-header py-3">
+//                     <h5 className="mb-0">Item List</h5>
+//                   </div>
+//                   <div className="card-body">
+//                     {state.map((item) => (
+//                       <div key={item.id}>
+//                         <div className="row d-flex align-items-center">
+//                           <div className="col-lg-3 col-md-12">
+//                             <div
+//                               className="bg-image rounded"
+//                               data-mdb-ripple-color="light"
+//                             >
+//                               <img
+//                                 src={item?.productImage}
+//                                 alt={item?.productImage}
+//                                 width={100}
+//                                 height={75}
+//                               />
+//                             </div>
+//                           </div>
+
+//                           <div className="col-lg-5 col-md-6">
+//                             <p>
+//                               <strong>{item?.productName}</strong>
+//                             </p>
+//                           </div>
+
+//                           <div className="col-lg-4 col-md-6">
+//                             <div
+//                               className="d-flex mb-4"
+//                               style={{ maxWidth: "300px" }}
+//                             >
+//                               <button
+//                                 className="btn px-3"
+//                                 onClick={() => removeItem(item)}
+//                               >
+//                                 <i className="fa fa-minus"></i>
+//                               </button>
+
+//                               <p className="mx-5">{item.qty}</p>
+
+//                               <button
+//                                 className="btn px-3"
+//                                 onClick={() => addItem(item)}
+//                               >
+//                                 <i className="fa fa-plus"></i>
+//                               </button>
+//                             </div>
+
+//                             <p className="text-start text-md-center">
+//                               <strong>
+//                                 <span className="text-muted">{item.qty}</span>{" "}
+//                                 x ${item?.productPrice}
+//                               </strong>
+//                             </p>
+//                           </div>
+//                         </div>
+
+//                         <hr className="my-4" />
+//                       </div>
+//                     ))}
+//                   </div>
+//                 </div>
+//               </div>
+//               <div className="col-md-4">
+//                 <div className="card mb-4">
+//                   <div className="card-header py-3 bg-light">
+//                     <h5 className="mb-0">Order Summary</h5>
+//                   </div>
+//                   <div className="card-body">
+//                     <ul className="list-group list-group-flush">
+//                       <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+//                         Products ({totalItems})<span>${Math.round(subtotal)}</span>
+//                       </li>
+//                       <li className="list-group-item d-flex justify-content-between align-items-center px-0">
+//                         Shipping
+//                         <span>${shipping}</span>
+//                       </li>
+//                       <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+//                         <div>
+//                           <strong>Total amount</strong>
+//                         </div>
+//                         <span>
+//                           <strong>${Math.round(subtotal + shipping)}</strong>
+//                         </span>
+//                       </li>
+//                     </ul>
+//                     <div className="text-center">
+//                       {state.length > 0 && (
+//                         <>
+//                           <button
+//                             className="btn btn-dark btn-lg btn-block"
+//                             onClick={() => setShowGooglePayment(true)}
+//                           >
+//                             Confirm Order
+//                           </button>
+//                           {showGooglePayment && (
+//                             <GooglePayment
+//                               totalAmount={Math.round(subtotal + shipping)}
+//                             />
+//                           )}
+//                         </>
+//                       )}
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </section>
+//       </>
+//     );
+//   };
+
+//   return (
+//     <>
+//       <Navbar />
+//       <div className="container my-3 py-3">
+//         <h1 className="text-center">Cart</h1>
+//         <hr />
+//         {state?.length > 0 ? <ShowCart /> : <EmptyCart />}
+//       </div>
+//       <Footer />
+//     </>
+//   );
+// };
+
+// export default Cart;

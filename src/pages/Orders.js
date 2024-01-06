@@ -186,6 +186,39 @@ const Orders = () => {
 
 
 
+  // const handleShipment = async (record) => {
+  //   try {
+  //     const response = await fetch(`http://localhost:8080/order/${record.orderId}/update-shipped?shipped=true`, {
+  //       method: 'PATCH',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       // body: JSON.stringify({
+  //       //   shipped: true, // or false based on your logic
+  //       // }),
+  //     });
+  //     // window.location.reload();
+  //     const responseData = await response.json();
+  //     console.log('Server Response:', responseData);
+  //     console.log('Request Payload:', JSON.stringify({ shipped: true }));
+
+  //     if (response.ok) {
+  //       // Handle the successful response, update state, etc.
+  //       console.log('Shipment status updated successfully!');
+  //       alert('Shipment status updated successfully!')
+  //     } else {
+  //       // Log the error message and status code
+  //       console.error('Error updating shipment status:', responseData);
+  //       alert('Error updating shipment status:', responseData);
+  //       console.error('Response Status Code:', response.status);
+  //       // You can also throw an error here if you want to propagate it further
+  //     }
+  //   } catch (error) {
+  //     // Log and handle unexpected errors
+  //     console.error('Error updating shipment status:', error);
+  //   }
+  // };
+  
   const handleShipment = async (record) => {
     try {
       const response = await fetch(`http://localhost:8080/order/${record.orderId}/update-shipped?shipped=true`, {
@@ -193,29 +226,33 @@ const Orders = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        // body: JSON.stringify({
-        //   shipped: true, // or false based on your logic
-        // }),
       });
-      window.location.reload();
+  
       const responseData = await response.json();
       console.log('Server Response:', responseData);
-      console.log('Request Payload:', JSON.stringify({ shipped: true }));
-
-      if (response.ok) {
-        // Handle the successful response, update state, etc.
-        console.log('Shipment status updated successfully!');
-      } else {
-        // Log the error message and status code
+  
+      if (!response.ok) {
         console.error('Error updating shipment status:', responseData);
         console.error('Response Status Code:', response.status);
-        // You can also throw an error here if you want to propagate it further
+        alert('Error updating shipment status: ' + responseData.error || 'Unknown error');
+      } else {
+        // Update the UI state to reflect the shipment status
+        setOrders(prevOrders => {
+          return prevOrders.map(order => {
+            if (order.orderId === record.orderId) {
+              return { ...order, shipped: true };
+            }
+            return order;
+          });
+        });
+        alert('Shipment status updated successfully!');
       }
     } catch (error) {
-      // Log and handle unexpected errors
       console.error('Error updating shipment status:', error);
+      alert('Error updating shipment status: ' + error.message || 'Unknown error');
     }
   };
+  
   const columns = [
     {
       title: 'User ID',
@@ -233,8 +270,8 @@ const Orders = () => {
       key: 'cart',
       render: (cart) => (
         <ul>
-          <li key={cart.product.productId}>
-            {cart.product.productName} - Quantity: {cart.quantity}
+          <li key={cart?.product?.productId}>
+            {cart?.product?.productName} - Quantity: {cart?.quantity}
           </li>
         </ul>
       ),

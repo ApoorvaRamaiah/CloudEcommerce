@@ -272,13 +272,14 @@ const Register = () => {
                     address,
                     pincode,
                     password,
-                    usertype,
+                    // usertype,
                 }),
             });
 
-            const registrationData = await registrationResponse.json();
+            // const registrationData = await registrationResponse.json();
             // Do something with registrationData if needed
-            console.log('Registration Data:', registrationData);
+            // console.log('Registration Data:', registrationData);
+            alert("User Registered Successfully")
 
             navigate("/login"); // Redirect to login page after successful registration
 
@@ -287,8 +288,15 @@ const Register = () => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.error('Registration error:', errorCode, errorMessage);
+            alert(errorMessage)
         }
     };
+    const handleKeyEnter = (e) => {
+        if (e.key === "Enter") {
+          // Trigger login action when the "Enter" key is pressed
+          handleRegister(e);
+        }
+      };
 
     return (
         <>
@@ -369,7 +377,7 @@ const Register = () => {
                                 <p>Already have an account? <Link to="/login" className="text-decoration-underline text-info">Login</Link> </p>
                             </div>
                             <div className="textcenter">
-                                <button className="my-2 mx-auto btn btn-dark" type="submit">
+                                <button className="my-2 mx-auto btn btn-dark" type="submit" onKeyDown={handleKeyEnter}>
                                     Register
                                 </button>
                             </div>

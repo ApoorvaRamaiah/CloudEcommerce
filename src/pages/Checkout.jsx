@@ -69,7 +69,7 @@ const Checkout = () => {
                 </div>
                 <div className="card-body">
                   <form className="needs-validation" novalidate>
-                    <div className="row g-3">
+                    {/* <div className="row g-3">
                       <div className="col-sm-6 my-1">
                         <label for="firstName" className="form-label">
                           First name
@@ -266,7 +266,7 @@ const Checkout = () => {
                       </div>
                     </div>
 
-                    <hr className="my-4" />
+                    <hr className="my-4" /> */}
 
                     <button
                       className="w-100 btn btn-primary "

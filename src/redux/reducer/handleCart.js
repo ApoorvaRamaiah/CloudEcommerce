@@ -2,7 +2,7 @@ const cart = []
 
 const handleCart = (state=cart, action) =>{
     const product = action.payload
-    console.log('Action:', action);
+    // console.log('Action:', action);
     switch(action.type){
         case "ADDITEM":
             // Check if product already in cart

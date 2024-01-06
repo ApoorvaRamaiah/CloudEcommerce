@@ -26,37 +26,14 @@ const Cart = () => {
       </div>
     );
   };
-
+console.log("cart", state, state.handleCart)
   const addItem = (product) => {
     dispatch(addCart(product));
   };
   const removeItem = (product) => {
     dispatch(delCart(product));
   };
-  // const handleGooglePaymentClick = () => {
-  //   // Add your logic here to handle the Google Payment click
-  // };
-  const handleGooglePaymentClick = (cartData) => {
-    // Add your logic here to send data to the backend
-    console.log("Sending data to the backend:", cartData);
-    alert("Google Payment button clicked!");
-
-    // Example: You can use fetch to send data to your backend endpoint
-    // fetch("/your-backend-endpoint", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(cartData),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("Backend response:", data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error sending data to the backend:", error);
-    //   });
-  };
+  
   const ShowCart = () => {
     let subtotal = 0;
     let shipping = 5.0;
@@ -81,7 +58,7 @@ const Cart = () => {
                   <div className="card-body">
                     {state.map((item) => {
                       return (
-                        <div key={item.id}>
+                        <div key={item?.id}>
                           <div className="row d-flex align-items-center">
                             <div className="col-lg-3 col-md-12">
                               <div
@@ -134,7 +111,7 @@ const Cart = () => {
 
                               <p className="text-start text-md-center">
                                 <strong>
-                                  <span className="text-muted">{item.qty}</span>{" "}
+                                  <span className="text-muted">{item?.qty}</span>{" "}
                                   x ${item?.productPrice}
                                 </strong>
                               </p>
@@ -171,55 +148,39 @@ const Cart = () => {
                         </span>
                       </li>
                     </ul>
-                    <div className="text-center">
-                      {/* {state.length > 0 && (
+                    {/* <div className="text-center">
+                      {state.length > 0 && (
                         <>
-                          <button
+            {showGooglePayment && (
+              <GooglePayment
+                totalAmount={Math.round(subtotal + shipping)}
+                onGooglePayClick={handleGooglePaymentClick}
+              />
+            )}
+                        </>
+                      )}
+
+                    </div> */}
+                     <div className="text-center">
+                      {/* {state.length > 0 && ( */}
+                        <>
+                          {/* <button
                             className="btn btn-dark btn-lg btn-block"
                             onClick={() => setShowGooglePayment(true)}
                           >
                             Google Payment
-                          </button>
-                          {showGooglePayment && (
+                          </button> */}
+                          {/* {showGooglePayment && ( */}
                             <GooglePayment
+                              totalAmount={parseInt(Math.round(subtotal + shipping))}
                               onClose={() => setShowGooglePayment(false)}
+                              // productId ={state.map(item => item.productId)}
+                              productId={state[0].productId}
                             />
-                          )}
+                          {/* )} */}
                         </>
-                      )} */}
-                      {/* {state.length > 0 && (
-                      <>
-                        <button
-                          className="btn btn-dark btn-lg btn-block"
-                          onClick={() => setShowGooglePayment(true)}
-                          disabled={showGooglePayment}
-                        >
-                          {showGooglePayment
-                            ? "Processing..."
-                            : "Buy with Google"}
-                        </button>
-                        {showGooglePayment && (
-                          <GooglePayment onClose={() => setShowGooglePayment(false)} />
-                        )}
-                      </>
-                    )} */}
-                          <GooglePayment onClick={handleGooglePaymentClick}> click</GooglePayment>
-
+                      {/* )} */}
                     </div>
-                    {/* <Link
-                      to="/checkout"
-                      className="btn btn-dark btn-lg btn-block"
-                    >
-                      Go to checkout
-                    </Link> */}
-                    {/* <Link
-                      className="navbar-item"
-                      activeClassName="is-active"
-                      to="/googlepayment"
-
-                    >
-                      Google Payment
-                    </Link> */}
                   </div>
                 </div>
               </div>

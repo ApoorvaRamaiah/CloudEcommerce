@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "cloudecommerce-1"
-  }
+    "default": "inm429cloudecommerce-fe226",
+    "cloudecommerce": "cloudecommerce-1-80d10",
+    "inm429cloudecommerce": "inm429cloudecommerce-fe226"
+  },
+  "targets": {},
+  "etags": {}
 }

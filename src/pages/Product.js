@@ -29,7 +29,7 @@ const Product = () => {
       setProduct(data);
       setLoading(false);
       // const response2 = await fetch(
-      //   // `http://localhost:8080/product/type/${data?.[0].productType}`
+        // `http://localhost:8080/product/type/${data?.productType}`
       //   `http://localhost:8080/product/type/electronics`
       // );
       // const data2 = await response2.json();
@@ -74,7 +74,7 @@ const Product = () => {
             <div className="col-md-6 col-sm-12 py-3">
               <img
                 className="img-fluid"
-                src={product?.[0]?.[0]?.productImage}
+                src={product?.productImage}
                 alt={product?.[0]?.productImage}
                 width="400px"
                 height="400px"
@@ -82,13 +82,13 @@ const Product = () => {
             </div>
             <div className="col-md-6 col-md-6 py-5">
               <h4 className="text-uppercase text-muted">{product?.[0]?.productType}</h4>
-              <h1 className="display-5">{product?.[0]?.productName}</h1>
+              <h1 className="display-5">{product?.productName}</h1>
               {/* <p className="lead">
                 {product.rating && product.rating.rate}{" "}
                 <i className="fa fa-star"></i>
               </p> */}
-              <h3 className="display-6  my-4">${product?.[0]?.productPrice}</h3>
-              <p className="lead">{product?.[0]?.productDescription}</p>
+              <h3 className="display-6  my-4">${product?.productPrice}</h3>
+              <p className="lead">{product?.productDescription}</p>
               <button
                 className="btn btn-outline-dark"
                 onClick={() => addProduct(product)}
@@ -179,16 +179,16 @@ const Product = () => {
       <div className="container">
         <div className="row">{loading ? <Loading /> : <ShowProduct />}</div>
         <div className="row my-5 py-5">
-          <div className="d-none d-md-block">
-          {/* <h2 className="">You may also Like</h2>
+          {/* <div className="d-none d-md-block">
+          <h2 className="">You may also Like</h2>
             <Marquee
               pauseOnHover={true}
               pauseOnClick={true}
               speed={50}
             >
               {loading2 ? <Loading2 /> : <ShowSimilarProduct />}
-            </Marquee> */}
-          </div>
+            </Marquee>
+          </div> */}
         </div>
       </div>
       <Footer />
