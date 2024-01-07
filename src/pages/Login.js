@@ -117,7 +117,7 @@ const Login = () => {
         sessionStorage.removeItem("userToken");
         sessionStorage.removeItem("userEmail");
         sessionStorage.removeItem("userData");
-        sessionStorage.removeItem("userType"); // Remove userType as well
+        sessionStorage.removeItem("userType");
         sessionStorage.removeItem("userId");
         navigate("/login");
       })
