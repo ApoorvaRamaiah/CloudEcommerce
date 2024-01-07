@@ -9,9 +9,7 @@ import { Footer, Navbar } from "../components";
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
-  const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [loading2, setLoading2] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -22,14 +20,12 @@ const Product = () => {
   useEffect(() => {
     const getProduct = async () => {
       setLoading(true);
-      setLoading2(true);
-      const response = await fetch(`http://35.246.127.243:8080/product/${id}`);
+      const response = await fetch(`http://localhost:8080/product/${id}`);
       const data = await response.json();
       setProduct(data);
       setLoading(false);
       console.log("res1", response)
       console.log("data", data)
-      setLoading2(false);
     };
     getProduct();
   }, [id]);
@@ -92,28 +88,6 @@ const Product = () => {
     );
   };
 
-  const Loading2 = () => {
-    return (
-      <>
-        <div className="my-4 py-4">
-          <div className="d-flex">
-            <div className="mx-4">
-              <Skeleton height={400} width={250} />
-            </div>
-            <div className="mx-4">
-              <Skeleton height={400} width={250} />
-            </div>
-            <div className="mx-4">
-              <Skeleton height={400} width={250} />
-            </div>
-            <div className="mx-4">
-              <Skeleton height={400} width={250} />
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  };
 
   return (
     <>

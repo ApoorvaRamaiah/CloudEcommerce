@@ -31,45 +31,6 @@ const Login = () => {
     }
   }, []);
 
-  // const loginHandler = useCallback(async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-  //     const userToken = await userCredential.user.getIdTokenResult();
-  //     console.log('User', userToken, userCredential.user);
-
-  //     setToken(userToken.token);
-  //     setUser({ email: userCredential.user.email, user: userCredential.user, userType:userCredential.user.userType, userId:userCredential.user.userId });
-
-  //     sessionStorage.setItem("userToken", userToken.token);
-  //     sessionStorage.setItem("userEmail", userCredential.user.email);
-  //     sessionStorage.setItem("userType", userCredential.user.userType);
-  //     sessionStorage.setItem("userId", userCredential.user.userId);
-
-  //     const loginResponse = await fetch(`http://35.246.127.243:8080/login`, {
-  //       method: 'GET',
-  //     });
-
-  //     if (loginResponse.ok) {
-  //       console.log('User count incremented successfully!');
-  //     } else {
-  //       console.error('Error incrementing user count:', loginResponse.statusText);
-  //     }
-
-  //     const userResponse = await fetch(`http://35.246.127.243:8080/user?email=${email}`);
-  //     const userData = await userResponse.json();
-
-  //     console.log("User Data:", userResponse, userData);
-  //     sessionStorage.setItem("userType", userData.userType);
-
-  //     navigate("/product", { state: { userData } });
-  //     console.log("User Data2:", userResponse, userData);
-  //   } catch (error) {
-  //     setError(error.message);
-  //     console.error('Login error:', error.message);
-  //   }
-  // }, [auth, email, password, navigate]);
   const loginHandler = useCallback(async (e) => {
     e.preventDefault();
   
@@ -84,7 +45,7 @@ const Login = () => {
       sessionStorage.setItem("userToken", userToken.token);
       sessionStorage.setItem("userEmail", userCredential.user.email);
   
-      const loginResponse = await fetch(`http://35.246.127.243:8080/login`, {
+      const loginResponse = await fetch(`http://localhost:8080/login`, {
         method: 'GET',
       });
   
@@ -94,18 +55,15 @@ const Login = () => {
         console.error('Error incrementing user count:', loginResponse.statusText);
       }
   
-      const userResponse = await fetch(`http://35.246.127.243:8080/user?email=${email}`);
+      const userResponse = await fetch(`http://localhost:8080/user?email=${email}`);
       const userData = await userResponse.json();
   
       console.log("User Data:", userResponse, userData);
-  
-      // Assuming userType is a property in userData
       const userType = userData.userType;
   
       setUser(prevUser => ({ ...prevUser, userType }));
       sessionStorage.setItem("userType", userType);
-  
-      // Assuming userData contains userId
+
       const userId = userData.userId;
       sessionStorage.setItem("userId", userId);
   
@@ -135,7 +93,7 @@ const Login = () => {
   //       console.error('Logout error:', error.message);
   //     });
 
-  //   fetch(`http://35.246.127.243:8080/logout`, {
+  //   fetch(`http://localhost:8080/logout`, {
   //     method: 'GET',
   //   })
   //     .then(response => response.json())
@@ -167,7 +125,7 @@ const Login = () => {
         console.error('Logout error:', error.message);
       });
   
-    fetch(`http://35.246.127.243:8080/logout`, {
+    fetch(`http://localhost:8080/logout`, {
       method: 'GET',
     })
       .then(response => response.json())
@@ -183,7 +141,6 @@ const Login = () => {
   };
   
   const handleSubmit = (e) => {
-    // Your login form submission logic
   };
   //   const handleSubmit = (e) => {
 //     dispatch(login({

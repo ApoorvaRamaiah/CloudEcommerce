@@ -24,7 +24,7 @@ const Register = () => {
 
             const user = userCredential.user;
             console.log('User registered:', user);
-            const registrationResponse = await fetch('http://35.246.127.243:8080/register', {
+            const registrationResponse = await fetch('http://localhost:8080/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

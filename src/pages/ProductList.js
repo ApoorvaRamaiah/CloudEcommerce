@@ -18,7 +18,7 @@ const ProductList = () => {
   const [orderId, setOrderId] = useState('');
 
   useEffect(() => {
-    fetch('http://35.246.127.243:8080/product')
+    fetch('http://localhost:8080/product')
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error('Error fetching products:', error));
@@ -104,7 +104,7 @@ const ProductList = () => {
       orderId: generateOrderId(),
     };
 
-    fetch('http://35.246.127.243:8080/product', {
+    fetch('http://localhost:8080/product', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ const ProductList = () => {
 
   const handleDeleteProduct = async (id) => {
     try {
-      const response = await fetch(`http://35.246.127.243:8080/product/${id}`, {
+      const response = await fetch(`http://localhost:8080/product/${id}`, {
         method: 'DELETE',
       });
 
@@ -156,59 +156,13 @@ const ProductList = () => {
     setCurrentProduct(product);
   };
 
-  // const handleUpdateProduct = () => {
-  //   // Send a PUT request to update the product
-  //   const updatedProduct = { ...currentProduct, orderId: orderId };
-
-  //   fetch(`http://35.246.127.243:8080/product/${updatedProduct.productId}/update-details`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(updatedProduct),
-  //   })
-  //     // .then((response) => response.json())
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         console.log("res", response)
-  //         throw new Error(`Error updating product: ${response.statusText}`);
-  //       }
-  //       return response.json(); // Handle non-JSON responses if needed
-  //       return response.text();
-  //     })
-  //     .then((responseText) => {
-  //       // Parse the response if it is JSON
-  //       const updatedProduct = JSON.parse(responseText);
-  //       // ...
-  //     })
-  //     .then((updatedProduct) => {
-  //       setProducts(
-  //         products.map((p) => (p.productId === updatedProduct.productId ? updatedProduct : p))
-  //       );
-  //       setCurrentProduct({
-  //         productId: '',
-  //         productName: '',
-  //         productQuantity: 0,
-  //         productPrice: 0,
-  //         productType: '',
-  //         productImage: '',
-  //         productDescription: '',
-  //       });
-  //       setOrderId(''); // Clear order ID after updating a product
-  //       message.success('Product updated successfully!');
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error updating product:', error);
-  //       message.error('Error updating product. Please try again.');
-  //     });
-  // };
   const handleUpdateProduct = () => {
     const updatedProduct = { ...currentProduct, orderId: orderId };
     if (!updatedProduct.orderId) {
       updatedProduct.orderId = generateOrderId(); 
     }
 
-    fetch(`http://35.246.127.243:8080/product/${updatedProduct.productId}/update-details`, {
+    fetch(`http://localhost:8080/product/${updatedProduct.productId}/update-details`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

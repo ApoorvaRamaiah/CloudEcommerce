@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import GooglePayButton from "@google-pay/button-react";
 import { selectAuth, login, logout } from '../redux/reducer/authSlice';
-import { Button } from "antd";
+import { Button, Modal, notification } from "antd";
 import { NavLink, useNavigate } from 'react-router-dom';
 
 const GooglePayment = ({ totalAmount, onGooglePayClick, location, productId }) => {
@@ -19,7 +19,7 @@ const GooglePayment = ({ totalAmount, onGooglePayClick, location, productId }) =
   const userToken = sessionStorage.getItem("userToken");
   const userType = sessionStorage.getItem("userType");
   const userId = sessionStorage.getItem("userId");
- console.log('loginuser', userId, authState, userData, productId, userToken, userType)
+//  console.log('loginuser', userId, authState, userData, productId, userToken, userType)
   useEffect(() => {
     calculateTotalAmount();
   }, [totalAmount]);
@@ -42,7 +42,7 @@ const GooglePayment = ({ totalAmount, onGooglePayClick, location, productId }) =
     calculateTotalAmount();
 
     try {
-      const cartResponse = await fetch("http://35.246.127.243:8080/cart", {
+      const cartResponse = await fetch("http://localhost:8080/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,8 +64,8 @@ const GooglePayment = ({ totalAmount, onGooglePayClick, location, productId }) =
         const cartData = await cartResponse.json();
         const receivedCartId = cartData.id;
         setCartId(receivedCartId);
-        console.log("id", cartData)
-        const orderResponse = await fetch("http://35.246.127.243:8080/order/create", {
+        // console.log("id", cartData)
+        const orderResponse = await fetch("http://localhost:8080/order/create", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -77,13 +77,18 @@ const GooglePayment = ({ totalAmount, onGooglePayClick, location, productId }) =
           }),
         });
 
-        if (orderResponse.ok) {
-          alert("Order placed successfully!")
-          navigate("/product");
-          console.log("Order placed successfully!");
-        } else {
-          console.error("Error placing order:", orderResponse.statusText);
-        }
+        setTimeout(() => {
+          if (orderResponse.ok) {
+            notification.success({
+              message: "Order Placed Successfully!",
+              description: "Thank you for your purchase.",
+            });
+            navigate("/product");
+            console.log("Order placed successfully!");
+          } else {
+            console.error("Error placing order:", orderResponse.statusText);
+          }
+        }, 4000)
       } else {
         console.error("Error creating cart:", cartResponse.statusText);
       }
@@ -95,8 +100,8 @@ const GooglePayment = ({ totalAmount, onGooglePayClick, location, productId }) =
   return (
     <>
       <div className="App">
-        <Button onClick={handleGooglePayClick}>Place Order</Button>
-        {/* <GooglePayButton
+        {/* <Button onClick={handleGooglePayClick}>Place Order</Button> */}
+        <GooglePayButton
           id="google-pay-button"
           onClick={handleGooglePayClick}
           environment="TEST"
@@ -137,7 +142,7 @@ const GooglePayment = ({ totalAmount, onGooglePayClick, location, productId }) =
           existingPaymentMethodRequired={false}
           buttonColor="black"
           buttonType="buy"
-        /> */}
+        />
       </div>
     </>
   );
