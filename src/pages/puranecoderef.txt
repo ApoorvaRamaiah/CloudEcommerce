@@ -1023,3 +1023,602 @@ console.log("After",authState);
 // };
 
 // export default Cart;
+/ import React from 'react'
+// import { Footer, Navbar } from "../components";
+// import { Link } from 'react-router-dom';
+// import { initializeApp } from 'firebase/app';
+// const Register = () => {
+//     return (
+//             <Navbar />
+//             <div className="container my-3 py-3">
+//                 <h1 className="textcenter">Register</h1>
+//                 <hr />
+//                 <div class="row my-4 h-100">
+//                     <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
+//                         <form>
+//                             <div class="form my-3">
+//                                 <label for="Name">Full Name</label>
+//                                 <input
+//                                     type="email"
+//                                     class="form-control"
+//                                     id="Name"
+//                                     placeholder="Enter Your Name"
+//                                 />
+//                             </div>
+//                             <div class="form my-3">
+//                                 <label for="Email">Email address</label>
+//                                 <input
+//                                     type="email"
+//                                     class="form-control"
+//                                     id="Email"
+//                                     placeholder="name@example.com"
+//                                 />
+//                             </div>
+//                             <div class="form  my-3">
+//                                 <label for="Password">Password</label>
+//                                 <input
+//                                     type="password"
+//                                     class="form-control"
+//                                     id="Password"
+//                                     placeholder="Password"
+//                                 />
+//                             </div>
+//                             <div className="my-3">
+//                                 <p>Already has an account? <Link to="/login" className="text-decoration-underline text-info">Login</Link> </p>
+//                             </div>
+//                             <div className="textcenter">
+//                                 <button class="my-2 mx-auto btn btn-dark" type="submit">
+//                                     Register
+//                                 </button>
+//                             </div>
+//                         </form>
+//                     </div>
+//                 </div>
+//             </div>
+//             <Footer />
+//         </>
+//     )
+// }
+
+// export default Register
+
+
+// import React, { useState } from 'react';
+// import { Footer, Navbar } from "../components";
+// import { Link } from 'react-router-dom';
+// import { initializeApp } from 'firebase/app';
+// import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+
+// const Register = () => {
+//     const [email, setEmail] = useState('');
+//     const [password, setPassword] = useState('');
+
+//     const handleRegister = (e) => {
+//         e.preventDefault();
+//         const auth = getAuth();
+//         createUserWithEmailAndPassword(auth, email, password)
+//             .then((userCredential) => {
+//                 // User registered successfully
+//                 const user = userCredential.user;
+//                 console.log('User registered:', user);
+//             })
+//             .catch((error) => {
+//                 // Error occurred during registration
+//                 const errorCode = error.code;
+//                 const errorMessage = error.message;
+//                 console.error('Registration error:', errorCode, errorMessage);
+//             });
+//     };
+
+//     return (
+//         <>
+//             <Navbar />
+//             <div className="container my-3 py-3">
+//                 <h1 className="textcenter">Register</h1>
+//                 <hr />
+//                 <div class="row my-4 h-100">
+//                     <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
+//                         <form onSubmit={handleRegister}>
+//                             <div class="form my-3">
+//                                 <label for="Name">Full Name</label>
+//                                 <input
+//                                     type="email"
+//                                     class="form-control"
+//                                     id="Name"
+//                                     placeholder="Enter Your Name"
+//                                 />
+//                             </div>
+//                             <div class="form my-3">
+//                                 <label for="Email">Email address</label>
+//                                 <input
+//                                     type="email"
+//                                     class="form-control"
+//                                     id="Email"
+//                                     placeholder="name@example.com"
+//                                     value={email}
+//                                     onChange={(e) => setEmail(e.target.value)}
+//                                 />
+//                             </div>
+//                             <div class="form  my-3">
+//                                 <label for="Password">Password</label>
+//                                 <input
+//                                     type="password"
+//                                     class="form-control"
+//                                     id="Password"
+//                                     placeholder="Password"
+//                                     value={password}
+//                                     onChange={(e) => setPassword(e.target.value)}
+//                                 />
+//                             </div>
+//                             <div className="my-3">
+//                                 <p>Already has an account? <Link to="/login" className="text-decoration-underline text-info">Login</Link> </p>
+//                             </div>
+//                             <div className="textcenter">
+//                                 <button class="my-2 mx-auto btn btn-dark" type="submit">
+//                                     Register
+//                                 </button>
+//                             </div>
+//                         </form>
+//                     </div>
+//                 </div>
+//             </div>
+//             <Footer />
+//         </>
+//     )
+// }
+// export default Register
+
+// import React, { useState } from 'react';
+// import { Footer, Navbar } from "../components";
+// import { Link, useNavigate } from 'react-router-dom';
+// import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+
+// const Register = () => {
+//     const [email, setEmail] = useState('');
+//     const [password, setPassword] = useState('');
+//     const navigate = useNavigate();
+
+//     const handleRegister = async (e) => {
+//         e.preventDefault();
+
+//         const auth = getAuth();
+
+//         try {
+//             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+//             // User registered successfully
+//             const user = userCredential.user;
+//             console.log('User registered:', user);
+//             navigate("/login"); // Redirect to home after successful login
+
+//         } catch (error) {
+//             // Error occurred during registration
+//             const errorCode = error.code;
+//             const errorMessage = error.message;
+//             console.error('Registration error:', errorCode, errorMessage);
+//         }
+//     };
+ 
+//     return (
+//         <>
+//             <Navbar />
+//             <div className="container my-3 py-3">
+//                 <h1 className="textcenter">Register</h1>
+//                 <hr />
+//                 <div className="row my-4 h-100">
+//                     <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
+//                         <form onSubmit={handleRegister}>
+//                             {/* <div className="form my-3">
+//                                 <label htmlFor="Name">Full Name</label>
+//                                 <input
+//                                     type="text"
+//                                     className="form-control"
+//                                     id="Name"
+//                                     placeholder="Enter Your Name"
+//                                 />
+//                             </div> */}
+//                             <div className="form my-3">
+//                                 <label htmlFor="Email">Email address</label>
+//                                 <input
+//                                     type="email"
+//                                     className="form-control"
+//                                     id="Email"
+//                                     placeholder="name@example.com"
+//                                     value={email}
+//                                     onChange={(e) => setEmail(e.target.value)}
+//                                 />
+//                             </div>
+//                             <div className="form  my-3">
+//                                 <label htmlFor="Password">Password</label>
+//                                 <input
+//                                     type="password"
+//                                     className="form-control"
+//                                     id="Password"
+//                                     placeholder="Password"
+//                                     value={password}
+//                                     onChange={(e) => setPassword(e.target.value)}
+//                                 />
+//                             </div>
+//                             <div className="my-3">
+//                                 <p>Already have an account? <Link to="/login" className="text-decoration-underline text-info">Login</Link> </p>
+//                             </div>
+//                             <div className="textcenter">
+//                                 <button className="my-2 mx-auto btn btn-dark" type="submit">
+//                                     Register
+//                                 </button>
+//                             </div>
+//                         </form>
+//                     </div>
+//                 </div>
+//             </div>
+//             <Footer />
+//         </>
+//     );
+// };
+
+// export default Register;
+
+// const uploadProps = {
+  //   name: 'file',
+  //   showUploadList: false,
+  //   beforeUpload: (file) => {
+  //     // Validate file type
+  //     const isImage = file.type.startsWith('image/');
+  //     if (!isImage) {
+  //       message.error('You can only upload image files!');
+  //     }
+  //     else {
+  //       // Display image preview
+  //       const reader = new FileReader();
+  //       const { name, path } = file;
+  //       console.log('File name:', name);
+  //       console.log('File path:', path);
+  //       reader.onloadend = () => {
+  //         // Use the File object to get file information
+  //         const { name, path } = file;
+  //         console.log('File name:', name);
+  //         console.log('File path:', this.state.path);
+  //         setCurrentProduct({
+  //           ...currentProduct, productImage: reader.result, productFileName: `$
+  //     {name}` });
+  //       };
+
+  //       // const imagePath = path || name;
+
+  //       //     reader.readAsDataURL(file);
+  //       //     reader.onloadend = () => {
+  //       //       setCurrentProduct({ ...currentProduct, productImage: reader.result });
+  //       //     };
+  //     }
+  //     // Use the File object to get file information
+  //     //   const { name, path } = file;
+  //     //   console.log('File name:', name);
+  //     //   console.log('File path:', path);
+
+  //     //   // Use the local path (if available) or the file name
+  //     //   const imagePath = path || name;
+
+  //     //   setCurrentProduct({ ...currentProduct, productImage: imagePath });
+  //     //   return false; // Prevent default upload behavior
+  //     // },
+  //     // return false; // Prevent default upload behavior
+  //   },
+  // };
+  // const uploadProps = {
+  //   name: 'file',
+  //   action: http://35.246.127.243:8080/product/{productId}/update-details', // Replace with your upload API endpoint
+  //   headers: {
+  //     authorization: 'authorization-text',
+  //   },
+  //   onChange: handleUploadChange,
+  // };
+  // const uploadProps = {
+  //   name: 'file',
+  //   showUploadList: false,
+  //   beforeUpload: (file) => {
+  //     // Validate file type
+  //     const isImage = file.type.startsWith('image/');
+  //     if (!isImage) {
+  //       message.error('You can only upload image files!');
+  //     } else {
+  //       // Display image preview
+  //       const reader = new FileReader();
+  
+  //       reader.onloadend = () => {
+  //         // Use the File object to get file information
+  //         const { name } = file;
+  
+  //         // Assuming you want to construct the image path using the file name
+  //         const imagePath = `https://storage.cloud.google.com/inm429-ecommerce-storage-bucket/${name}`;
+  
+  //         setCurrentProduct({
+  //           ...currentProduct,
+  //           image: { file, preview: reader.result, path: imagePath },
+  //         });
+  //       };
+  
+  //       reader.readAsDataURL(file);
+  //     }
+  //     return false; // Prevent default upload behavior
+  //   },
+  // };
+  
+  // const uploadProps = {
+  //   name: 'file',
+  //   showUploadList: false,
+  //   beforeUpload: (file) => {
+  //     // Validate file type
+  //     const isImage = file.type.startsWith('image/');
+  //     if (!isImage) {
+  //       message.error('You can only upload image files!');
+  //       return false; // Prevent default upload behavior
+  //     }
+  
+  //     // Display image preview
+  //     const reader = new FileReader();
+  
+  //     reader.onloadend = () => {
+  //       // Use the File object to get file information
+  //       const { name } = file;
+  
+  //       // Assuming you want to construct the image path using the file name
+  //       const imagePath = `https://storage.cloud.google.com/inm429-ecommerce-storage-bucket/${name}`;
+  
+  //       // Update only the productImage property
+  //       setCurrentProduct((prevProduct) => ({
+  //         ...prevProduct,
+  //         productImage: imagePath,
+  //       }));
+  //     };
+  
+  //     reader.readAsDataURL(file);
+  
+  //     return false; // Prevent default upload behavior
+  //   },
+  // };
+  // const uploadProps = {
+  //   name: 'file',
+  //   showUploadList: false,
+  //   beforeUpload: (file) => {
+  //     // Validate file type
+  //     const isImage = file.type.startsWith('image/');
+  //     if (!isImage) {
+  //       message.error('You can only upload image files!');
+  //       return false; // Prevent default upload behavior
+  //     }
+  
+  //     // Display image preview
+  //     const reader = new FileReader();
+  
+  //     reader.onloadend = () => {
+  //       // Use the File object to get file information
+  //       const { name } = file;
+  
+  //       // Assuming you want to construct the image path using the file name
+  //       const imagePath = `https://storage.cloud.google.com/inm429-ecommerce-storage-bucket/${name}`;
+  
+  //       // Update the productImage property directly in the payload
+  //       setCurrentProduct((prevProduct) => ({
+  //         ...prevProduct,
+  //         productImage: imagePath,
+  //       }));
+  //     };
+  
+  //     reader.readAsDataURL(file);
+  
+  //     return false; // Prevent default upload behavior
+  //   },
+  // };
+// import React, { useCallback, useEffect, useState } from "react";
+// import { Footer, Navbar } from "../components";
+// import "react-loading-skeleton/dist/skeleton.css";
+// import { Link, useNavigate } from "react-router-dom";
+// import { auth } from "../firebase";
+// import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+// import "./Pages.css";
+// import { useSelector, useDispatch } from 'react-redux';
+// import { selectAuth, login, logout } from '../redux/reducer/authSlice';
+// import { loginUser, logoutUser } from '../redux/action/authActions';
+// import { configureStore } from 'redux';
+// import { Provider } from 'react-redux';
+
+// const Login = (isAuthenticated) => {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [error, setError] = useState("");
+//   const [token, setToken] = useState(null);
+//   const [user, setUser] = useState(null);
+//   const [modalVisible, setModalVisible] = useState(false);
+//   const navigate = useNavigate();
+//   const auth = getAuth();
+//   const dispatch = useDispatch();
+//   // const store = configureStore(
+//   // const authState = useSelector(selectAuth);
+
+//   useEffect(() => {
+//     const unsubscribe = onAuthStateChanged(auth, (user) => {
+//       if (user) {
+//         const userToken = localStorage.getItem("userToken");
+//         setToken(userToken);
+//         dispatch(login({ email: user.email, loggedIn: true }));
+//       } else {
+//         setToken(null);
+//         dispatch(logout());
+//       }
+//     });
+  
+//     return () => {
+//       unsubscribe();
+//     };
+//   }, [auth, dispatch]);
+
+//   const loginHandler = useCallback(async (e) => {
+//     e.preventDefault();
+  
+//     try {
+//       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+//       const userToken = await userCredential.user.getIdTokenResult();
+//       console.log('User', userToken, userCredential.user);
+  
+//       setToken(userToken.token);
+//       setUser(userCredential.user);
+//       localStorage.setItem("userToken", userToken.token);
+//       localStorage.setItem("userEmail", userCredential.user.email);
+
+//       const loginResponse = await fetch(`http://35.246.127.243:8080/login`, {
+//         method: 'GET',
+//       });
+  
+//       if (loginResponse.ok) {
+//         console.log('User count incremented successfully!');
+//       } else {
+//         console.error('Error incrementing user count:', loginResponse.statusText);
+//       }
+  
+  
+//       const userResponse = await fetch(`http://35.246.127.243:8080/user?email=${email}`);
+//       const userData = await userResponse.json();
+  
+//       console.log("User Data:", userResponse, userData);
+  
+//       dispatch(login({
+//         email: email,
+//         userType: userData.userType,
+//         userData: userData,
+//         loggedIn: true,
+//       }));
+//       const userId = userData.userId;
+//       navigate("/product", { state: { userData } });
+//       console.log("User Data2:", userResponse, userData);
+
+//     } catch (error) {
+//       setError(error.message);
+//       console.error('Login error:', error.message);
+//     }
+//   }, [auth, email, password, navigate, dispatch]);
+  
+  
+//   const logoutHandler = () => {
+//     console.log('Starting logout process...');
+  
+//     signOut(auth)
+//     .then(() => {
+//       setToken(null);
+//       setUser(null);
+//       localStorage.removeItem("userToken");
+//       localStorage.removeItem("userEmail");
+//       navigate("/login");
+//     })
+//     .catch((error) => {
+//       console.error('Logout error:', error.message);
+//     });
+//     fetch(`http://35.246.127.243:8080/logout`, {
+//       method: 'GET',
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//       console.log('User count decremented successfully!', data);
+//       // console.log('Before logout - Redux state:', store.getState());
+//       dispatch(logoutUser());
+//       // console.log('After logout - Redux state:', store.getState());
+      
+//       setModalVisible(true);
+//     })
+//     .catch(error => {
+//       console.error('Error decrementing user count:', error);
+//     });
+  
+//     console.log('Logout process completed.');
+//   };
+  
+//   const handleSubmit = (e) => {
+//     dispatch(login({
+//       email: email,
+//       password: password,
+//       loggedIn: true,
+//     }))
+//   }
+//   const handleKeyEnter = (e) => {
+//     if (e.key === "Enter") {
+//       loginHandler(e);
+//     }
+//   };
+//   return (
+//     <>
+//       <Navbar />
+//       <div className="container my-3 py-3">
+//         <h1 className="textcenter">{isAuthenticated ? "Login" : "Logout"}</h1>
+//         <hr />
+//         <div className="row my-4 h-100">
+//           <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
+//             <form onSubmit={(e) => handleSubmit(e)}>
+//               <div className="my-3">
+//                 <label htmlFor="display-4">Email address</label>
+//                 <input
+//                   value={email}
+//                   type="email"
+//                   className="form-control"
+//                   id="floatingInput"
+//                   placeholder="name@example.com"
+//                   onChange={(e) => setEmail(e.target.value)}
+//                   onKeyDown={handleKeyEnter}
+//                 />
+//               </div>
+//               <div className="my-3">
+//                 <label htmlFor="floatingPassword display-4">Password</label>
+//                 <input
+//                   type="password"
+//                   className="form-control"
+//                   id="floatingPassword"
+//                   placeholder="Password"
+//                   value={password}
+//                   onChange={(e) => setPassword(e.target.value)}
+//                   onKeyDown={handleKeyEnter}
+//                 />
+//               </div>
+//               {error && (
+//                 <div className="alert alert-danger" role="alert">
+//                   {error}
+//                 </div>
+//               )}
+//               <div className="my-3">
+//                 <p>
+//                   {token ? (
+//                     <button
+//                       className="my-2 mx-auto btn btn-dark"
+//                       type="button"
+//                       onClick={logoutHandler}
+//                     >
+//                       Logout
+//                     </button>
+//                   ) : (
+//                     <>
+//                       New Here?{' '}
+//                       <Link to="/register" className="text-decoration-underline text-info">
+//                         Register
+//                       </Link>{' '}
+//                     </>
+//                   )}
+//                 </p>
+//               </div>
+//               <div className="textcenter">
+//                 {!token && (
+//                   <button
+//                     className="my-2 mx-auto btn btn-dark"
+//                     type="button"
+//                     onClick={loginHandler}
+//                   >
+//                     Login
+//                   </button>
+//                 )}
+//               </div>
+//             </form>
+//           </div>
+//         </div>
+//       </div>
+//       <Footer />
+//     </>
+//   );
+// };
+
+// export default Login;
+

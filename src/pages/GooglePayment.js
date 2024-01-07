@@ -2,18 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import GooglePayButton from "@google-pay/button-react";
 import { selectAuth, login, logout } from '../redux/reducer/authSlice';
+import { Button } from "antd";
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const GooglePayment = ({ totalAmount, onGooglePayClick, location, productId }) => {
+  const navigate = useNavigate();
   // const userId = location?.state && location?.state?.userId;
   const authState = useSelector(selectAuth);
-  const userId = authState.user?.userData?.userId;
+  // const userId = authState.user?.userData?.userId;
 
   const state = useSelector((state) => state.handleCart);
   const userData = useSelector((state) => state.auth.userData);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const [amount, setAmount] = useState(0);
-  const [cartId, setCartId] = useState(null); // New state to store cart ID
- console.log('loginuser', userId, authState, userData, productId)
+  const [cartId, setCartId] = useState(null); 
+  const userToken = sessionStorage.getItem("userToken");
+  const userType = sessionStorage.getItem("userType");
+  const userId = sessionStorage.getItem("userId");
+ console.log('loginuser', userId, authState, userData, productId, userToken, userType)
   useEffect(() => {
     calculateTotalAmount();
   }, [totalAmount]);
@@ -25,17 +31,14 @@ const GooglePayment = ({ totalAmount, onGooglePayClick, location, productId }) =
     });
     const roundedTotal = Math.round(subtotal);
 
-    // Set the amount to the state
     setAmount(roundedTotal);
   };
 
   const handleConfirmOrder = () => {
-    // Additional logic for confirming the order
     setOrderConfirmed(true);
   };
 
   const handleGooglePayClick = async () => {
-    // Calculate total amount before making the API call
     calculateTotalAmount();
 
     try {
@@ -70,11 +73,13 @@ const GooglePayment = ({ totalAmount, onGooglePayClick, location, productId }) =
           body: JSON.stringify({
             shipped: false,
             amount: amount,
-            cartId: receivedCartId, // Use the received cart ID
+            cartId: receivedCartId, 
           }),
         });
 
         if (orderResponse.ok) {
+          alert("Order placed successfully!")
+          navigate("/product");
           console.log("Order placed successfully!");
         } else {
           console.error("Error placing order:", orderResponse.statusText);
@@ -90,7 +95,8 @@ const GooglePayment = ({ totalAmount, onGooglePayClick, location, productId }) =
   return (
     <>
       <div className="App">
-        <GooglePayButton
+        <Button onClick={handleGooglePayClick}>Place Order</Button>
+        {/* <GooglePayButton
           id="google-pay-button"
           onClick={handleGooglePayClick}
           environment="TEST"
@@ -131,7 +137,7 @@ const GooglePayment = ({ totalAmount, onGooglePayClick, location, productId }) =
           existingPaymentMethodRequired={false}
           buttonColor="black"
           buttonType="buy"
-        />
+        /> */}
       </div>
     </>
   );

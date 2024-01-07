@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Link, useParams } from "react-router-dom";
-import Marquee from "react-fast-marquee";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
 
@@ -28,16 +27,8 @@ const Product = () => {
       const data = await response.json();
       setProduct(data);
       setLoading(false);
-      // const response2 = await fetch(
-        // `http://35.246.127.243:8080/product/type/${data?.productType}`
-      //   `http://35.246.127.243:8080/product/type/electronics`
-      // );
-      // const data2 = await response2.json();
       console.log("res1", response)
       console.log("data", data)
-      // console.log("res2", response2)
-      // console.log("data2", data2)
-      // setSimilarProducts(data2);
       setLoading2(false);
     };
     getProduct();
@@ -83,10 +74,6 @@ const Product = () => {
             <div className="col-md-6 col-md-6 py-5">
               <h4 className="text-uppercase text-muted">{product?.[0]?.productType}</h4>
               <h1 className="display-5">{product?.productName}</h1>
-              {/* <p className="lead">
-                {product.rating && product.rating.rate}{" "}
-                <i className="fa fa-star"></i>
-              </p> */}
               <h3 className="display-6  my-4">${product?.productPrice}</h3>
               <p className="lead">{product?.productDescription}</p>
               <button
@@ -128,68 +115,11 @@ const Product = () => {
     );
   };
 
-  const ShowSimilarProduct = () => {
-    return (
-      <>
-        <div className="py-4 my-4">
-          <div className="d-flex">
-            {similarProducts.map((item) => {
-              return (
-                <div key={item?.productId} className="card mx-4 text-center">
-                  <img
-                    className="card-img-top p-3"
-                    src={item?.productImage}
-                    alt="Card"
-                    height={300}
-                    width={300}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">
-                      {item?.productName?.substring(0, 15)}...
-                    </h5>
-                  </div>
-                  {/* <ul className="list-group list-group-flush">
-                    <li className="list-group-item lead">${product.price}</li>
-                  </ul> */}
-                  <div className="card-body">
-                    <Link
-                      to={"/product/" + item?.productId}
-                      className="btn btn-dark m-1"
-                    >
-                      Buy Now
-                    </Link>
-                    <button
-                      className="btn btn-dark m-1"
-                      onClick={() => addProduct(item)}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </>
-    );
-  };
   return (
     <>
       <Navbar />
       <div className="container">
         <div className="row">{loading ? <Loading /> : <ShowProduct />}</div>
-        <div className="row my-5 py-5">
-          {/* <div className="d-none d-md-block">
-          <h2 className="">You may also Like</h2>
-            <Marquee
-              pauseOnHover={true}
-              pauseOnClick={true}
-              speed={50}
-            >
-              {loading2 ? <Loading2 /> : <ShowSimilarProduct />}
-            </Marquee>
-          </div> */}
-        </div>
       </div>
       <Footer />
     </>

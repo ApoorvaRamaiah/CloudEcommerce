@@ -14,26 +14,14 @@ const Navbar = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
-  // const history = useHistory();
   const navigate = useNavigate();
-  // console.log(authState);
 
   const handleLogin = () => {
-    // Call the loginUser action to tell the box to log in
     dispatch(loginUser());
   };
-  // const handleLogout = () => {
-  //   dispatch(logoutUser()); // Assuming you have a logout action in your authSlice
 
-  //   // Add any additional logout logic here, such as clearing local storage, navigating, etc.
-  //   // For example:
-  //   localStorage.removeItem("userToken");
-  //   navigate("/login");
-  // }
-  // console.log(authState);
   const handleLogout = async () => {
     try {
-      // Make API request to decrement user count
       const logoutResponse = await fetch(`http://35.246.127.243:8080/logout`, {
         method: 'GET',
       });
@@ -45,18 +33,20 @@ const Navbar = () => {
         console.error('Error decrementing user count:', logoutResponse.statusText);
       }
 
-      // Dispatch the logout action
       dispatch(logoutUser());
 
-      // Additional logout logic, e.g., clearing local storage
       localStorage.removeItem("userToken");
-
-      // Navigate to the login page
+      sessionStorage.removeItem('userToken');
+      sessionStorage.removeItem('userType');
       navigate("/login");
     } catch (error) {
       console.error('Logout error:', error.message);
     }
   }
+  const userToken = sessionStorage.getItem("userToken");
+  const userType = sessionStorage.getItem("userType");
+  const userId= sessionStorage.getItem("userId");
+  console.log(userType,"NOTE",userId)
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
       <div className="container">
@@ -74,8 +64,7 @@ const Navbar = () => {
               <NavLink className="nav-link" to="/product">Products</NavLink>
             </li>
           </ul>
-          {authState.isAuthenticated ? (
-            authState.user.userType === 0 ? (
+          {userToken ?( userType === "0" ? (
               <>
                 <NavLink to="/cart" className="btn btn-outline-dark m-2"> Cart ({cartState?.length > 0 ? `${cartState?.length}` : '0'}) </NavLink>
                 <NavLink to="/login" className="btn btn-outline-dark m-2" onClick={handleLogout}> Logout </NavLink>
@@ -95,6 +84,25 @@ const Navbar = () => {
     </NavLink> */}
             </>
           )}
+
+          {/* {authState.isAuthenticated ? (
+            authState.user.userType === 0 ? (
+              <>
+                <NavLink to="/cart" className="btn btn-outline-dark m-2"> Cart ({cartState?.length > 0 ? `${cartState?.length}` : '0'}) </NavLink>
+                <NavLink to="/login" className="btn btn-outline-dark m-2" onClick={handleLogout}> Logout </NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink className="btn btn-outline-dark m-2" to="/productlist"> Products</NavLink>
+                <NavLink to="/orders" className="btn btn-outline-dark m-2"> Orders </NavLink>
+                <NavLink to="/login" className="btn btn-outline-dark m-2" onClick={handleLogout}> Logout </NavLink>
+              </>
+            )
+          ) : (
+            <>
+              <NavLink to="/register" className="btn btn-outline-dark m-2"> <i className="fa fa-user-plus mr-1"></i>  Register </NavLink>
+            </>
+          )} */}
 
           {/* <div className="buttons textcenter">
             {authState.isAuthenticated ? (

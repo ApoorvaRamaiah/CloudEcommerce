@@ -26,14 +26,14 @@ const Cart = () => {
       </div>
     );
   };
-console.log("cart", state, state.handleCart)
+  console.log("cart", state, state.handleCart)
   const addItem = (product) => {
     dispatch(addCart(product));
   };
   const removeItem = (product) => {
     dispatch(delCart(product));
   };
-  
+
   const ShowCart = () => {
     let subtotal = 0;
     let shipping = 5.0;
@@ -161,24 +161,24 @@ console.log("cart", state, state.handleCart)
                       )}
 
                     </div> */}
-                     <div className="text-center">
+                    <div className="text-center">
                       {/* {state.length > 0 && ( */}
-                        <>
-                          {/* <button
+                      <>
+                        {/* <button
                             className="btn btn-dark btn-lg btn-block"
                             onClick={() => setShowGooglePayment(true)}
                           >
                             Google Payment
                           </button> */}
-                          {/* {showGooglePayment && ( */}
-                            <GooglePayment
-                              totalAmount={parseInt(Math.round(subtotal + shipping))}
-                              onClose={() => setShowGooglePayment(false)}
-                              // productId ={state.map(item => item.productId)}
-                              productId={state[0].productId}
-                            />
-                          {/* )} */}
-                        </>
+                        {/* {showGooglePayment && ( */}
+                        <GooglePayment
+                          totalAmount={parseInt(Math.round(subtotal + shipping))}
+                          onClose={() => setShowGooglePayment(false)}
+                          // productId ={state.map(item => item.productId)}
+                          productId={state[0].productId}
+                        />
+                        {/* )} */}
+                      </>
                       {/* )} */}
                     </div>
                   </div>

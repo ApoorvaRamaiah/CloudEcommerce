@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Input, Upload, message, Popconfirm } from 'antd';
 import { UploadOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import './ProductList.css'; // Import the CSS file
+import './ProductList.css'; 
 import { Footer, Navbar } from "../components";
 
 const ProductList = () => {
@@ -18,7 +18,6 @@ const ProductList = () => {
   const [orderId, setOrderId] = useState('');
 
   useEffect(() => {
-    // Fetch products from API when component mounts
     fetch('http://35.246.127.243:8080/product')
       .then((response) => response.json())
       .then((data) => setProducts(data))
@@ -94,18 +93,15 @@ const ProductList = () => {
     setCurrentProduct({ ...currentProduct, [name]: value });
   };
   const generateOrderId = () => {
-    // You can implement your own logic to generate a unique order ID here
-    // For simplicity, using a timestamp as an example
     return `ORDER-${Date.now()}`;
   };
 
   const handleAddProduct = () => {
-    // Send a POST request to add a new product
     const newProduct = {
       ...currentProduct,
-      productId: products.length + 1, // Automatically increase product ID
+      productId: products.length + 1, 
       // orderId: orderId,
-      orderId: generateOrderId(), // Generate and assign order ID
+      orderId: generateOrderId(),
     };
 
     fetch('http://35.246.127.243:8080/product', {
@@ -127,7 +123,7 @@ const ProductList = () => {
           productImage: '',
           productDescription: '',
         });
-        setOrderId(''); // Clear order ID after adding a product
+        setOrderId('');
         message.success('Product added successfully!');
       })
       .catch((error) => {
@@ -207,10 +203,9 @@ const ProductList = () => {
   //     });
   // };
   const handleUpdateProduct = () => {
-    // Send a PUT request to update the product
     const updatedProduct = { ...currentProduct, orderId: orderId };
     if (!updatedProduct.orderId) {
-      updatedProduct.orderId = generateOrderId(); // Generate and assign order ID
+      updatedProduct.orderId = generateOrderId(); 
     }
 
     fetch(`http://35.246.127.243:8080/product/${updatedProduct.productId}/update-details`, {
@@ -221,18 +216,15 @@ const ProductList = () => {
       body: JSON.stringify(updatedProduct),
     })
       .then(async (response) => {
-        // Log raw response
         console.log('Raw response:', await response);
 
         if (!response.ok) {
           throw new Error(`Error updating product: ${response.statusText}`);
         }
 
-        // Parse JSON data
         return response.json();
       })
       .then((updatedProduct) => {
-        // Handle the updated product
         setProducts(
           products.map((p) => (p.productId === updatedProduct.productId ? updatedProduct : p))
         );
@@ -245,7 +237,7 @@ const ProductList = () => {
           productImage: '',
           productDescription: '',
         });
-        setOrderId(''); // Clear order ID after updating a product
+        setOrderId('');
         message.success('Product updated successfully!');
       })
       .catch((error) => {
@@ -253,24 +245,11 @@ const ProductList = () => {
         message.error('Error updating product. Please try again.');
       });
   };
-  // const handleUploadChange = (info) => {
-  //   if (info.file.status === 'done') {
-  //     message.success(`${info.file.name} file uploaded successfully`);
-  //     // Assuming the server responds with the uploaded image URL
-  //     const imageUrl = info.file.response.url;
-  //     setCurrentProduct({ ...currentProduct, productImage: imageUrl });
-  //   } else if (info.file.status === 'error') {
-  //     message.error(`${info.file.name} file upload failed.`);
-  //   }
-  // };
+
   const handleUploadChange = (info) => {
     if (info.file.status === 'done') {
       message.success(`${info.file.name} file uploaded successfully`);
-      
-      // Assuming the server responds with the uploaded image URL
       const imageUrl = info.file.response.url;
-      
-      // Update only the productImage property
       setCurrentProduct((prevProduct) => ({
         ...prevProduct,
         productImage: imageUrl,
@@ -279,189 +258,34 @@ const ProductList = () => {
       message.error(`${info.file.name} file upload failed.`);
     }
   };
-  // const uploadProps = {
-  //   name: 'file',
-  //   showUploadList: false,
-  //   beforeUpload: (file) => {
-  //     // Validate file type
-  //     const isImage = file.type.startsWith('image/');
-  //     if (!isImage) {
-  //       message.error('You can only upload image files!');
-  //     }
-  //     else {
-  //       // Display image preview
-  //       const reader = new FileReader();
-  //       const { name, path } = file;
-  //       console.log('File name:', name);
-  //       console.log('File path:', path);
-  //       reader.onloadend = () => {
-  //         // Use the File object to get file information
-  //         const { name, path } = file;
-  //         console.log('File name:', name);
-  //         console.log('File path:', this.state.path);
-  //         setCurrentProduct({
-  //           ...currentProduct, productImage: reader.result, productFileName: `$
-  //     {name}` });
-  //       };
-
-  //       // const imagePath = path || name;
-
-  //       //     reader.readAsDataURL(file);
-  //       //     reader.onloadend = () => {
-  //       //       setCurrentProduct({ ...currentProduct, productImage: reader.result });
-  //       //     };
-  //     }
-  //     // Use the File object to get file information
-  //     //   const { name, path } = file;
-  //     //   console.log('File name:', name);
-  //     //   console.log('File path:', path);
-
-  //     //   // Use the local path (if available) or the file name
-  //     //   const imagePath = path || name;
-
-  //     //   setCurrentProduct({ ...currentProduct, productImage: imagePath });
-  //     //   return false; // Prevent default upload behavior
-  //     // },
-  //     // return false; // Prevent default upload behavior
-  //   },
-  // };
-  // const uploadProps = {
-  //   name: 'file',
-  //   action: http://35.246.127.243:8080/product/{productId}/update-details', // Replace with your upload API endpoint
-  //   headers: {
-  //     authorization: 'authorization-text',
-  //   },
-  //   onChange: handleUploadChange,
-  // };
-  // const uploadProps = {
-  //   name: 'file',
-  //   showUploadList: false,
-  //   beforeUpload: (file) => {
-  //     // Validate file type
-  //     const isImage = file.type.startsWith('image/');
-  //     if (!isImage) {
-  //       message.error('You can only upload image files!');
-  //     } else {
-  //       // Display image preview
-  //       const reader = new FileReader();
-  
-  //       reader.onloadend = () => {
-  //         // Use the File object to get file information
-  //         const { name } = file;
-  
-  //         // Assuming you want to construct the image path using the file name
-  //         const imagePath = `https://storage.cloud.google.com/inm429-ecommerce-storage-bucket/${name}`;
-  
-  //         setCurrentProduct({
-  //           ...currentProduct,
-  //           image: { file, preview: reader.result, path: imagePath },
-  //         });
-  //       };
-  
-  //       reader.readAsDataURL(file);
-  //     }
-  //     return false; // Prevent default upload behavior
-  //   },
-  // };
-  
-  // const uploadProps = {
-  //   name: 'file',
-  //   showUploadList: false,
-  //   beforeUpload: (file) => {
-  //     // Validate file type
-  //     const isImage = file.type.startsWith('image/');
-  //     if (!isImage) {
-  //       message.error('You can only upload image files!');
-  //       return false; // Prevent default upload behavior
-  //     }
-  
-  //     // Display image preview
-  //     const reader = new FileReader();
-  
-  //     reader.onloadend = () => {
-  //       // Use the File object to get file information
-  //       const { name } = file;
-  
-  //       // Assuming you want to construct the image path using the file name
-  //       const imagePath = `https://storage.cloud.google.com/inm429-ecommerce-storage-bucket/${name}`;
-  
-  //       // Update only the productImage property
-  //       setCurrentProduct((prevProduct) => ({
-  //         ...prevProduct,
-  //         productImage: imagePath,
-  //       }));
-  //     };
-  
-  //     reader.readAsDataURL(file);
-  
-  //     return false; // Prevent default upload behavior
-  //   },
-  // };
-  // const uploadProps = {
-  //   name: 'file',
-  //   showUploadList: false,
-  //   beforeUpload: (file) => {
-  //     // Validate file type
-  //     const isImage = file.type.startsWith('image/');
-  //     if (!isImage) {
-  //       message.error('You can only upload image files!');
-  //       return false; // Prevent default upload behavior
-  //     }
-  
-  //     // Display image preview
-  //     const reader = new FileReader();
-  
-  //     reader.onloadend = () => {
-  //       // Use the File object to get file information
-  //       const { name } = file;
-  
-  //       // Assuming you want to construct the image path using the file name
-  //       const imagePath = `https://storage.cloud.google.com/inm429-ecommerce-storage-bucket/${name}`;
-  
-  //       // Update the productImage property directly in the payload
-  //       setCurrentProduct((prevProduct) => ({
-  //         ...prevProduct,
-  //         productImage: imagePath,
-  //       }));
-  //     };
-  
-  //     reader.readAsDataURL(file);
-  
-  //     return false; // Prevent default upload behavior
-  //   },
-  // };
   const uploadProps = {
     name: 'file',
     showUploadList: false,
     beforeUpload: (file) => {
-      // Validate file type
       const isImage = file.type.startsWith('image/');
       if (!isImage) {
         message.error('You can only upload image files!');
-        return false; // Prevent default upload behavior
+        return false;
       }
   
-      // Display image preview
       const reader = new FileReader();
   
       reader.onloadend = () => {
-        // Use the File object to get file information
         const { name } = file;
   
-        // Assuming you want to construct the image path using the file name
         const imagePath = `https://storage.cloud.google.com/inm429-ecommerce-storage-bucket/${name}`;
   
-        // Update the productImage property directly in the payload
+     
         setCurrentProduct((prevProduct) => ({
           ...prevProduct,
           productImage: imagePath,
-          image: undefined, // Set image property to undefined to exclude it from the payload
+          image: undefined, 
         }));
       };
   
       reader.readAsDataURL(file);
   
-      return false; // Prevent default upload behavior
+      return false; 
     },
   };
   
